@@ -1,40 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Main Menu</title>
+    <title>Main Menu</title>
 </head>
+
 <body>
-    <ul>
-        <li><a href="{{ url_for('AddEmp') }}">Add Employee</a></li>
-		<li><a href="{{ url_for('ApplyLeaveEmp') }}">Apply for Leave</a></li>
-    </ul>
+    <a href="/AddEmp"><input type="button" value="Add Employee"></a>
+    <a href="/ApplyLeaveEmp"><input type="button" value="Apply Leave"></a>
+    <a href="/ReadEmp"><input type="button" value="Read Employee"></a>
 
 </body>
-<!-- <center>
-	<font color="black" size="5" style="font-family: avenir">
-        <header>
-            <h1>Welcome to My Website</h1>
-            <nav>
-                <ul>
-                    <li><a href="/addemp">add emp</a></li>
-                    <li><a href="/applyleave">Apply leave</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-        <form action="/main" autocomplete="on" method = "POST" enctype="multipart/form-data">
-            <h1 style="color: DodgerBlue">Main Menu</h1>
 
-            <body bgcolor="lightgrey">
-                <a href="ApplyLeaveEmp.html"><button>Apply Leave</button></a>
-                <a href="AddEmp.html"><button>Add Employee</button></a>
-                <a href="DeleteEmp.html"><button>Delete Employee</button></a>
-                <a href="ReadEmp.html"><button>Read Employee</button></a>
-                <a href="UpdateEmp.html"><button>Update Employee</button></a>
-                <a href="AboutUs.html"><button>About Us</button></a>
-            </body>
-        </form>
-	</font>
-</center> -->
 </html>
-
