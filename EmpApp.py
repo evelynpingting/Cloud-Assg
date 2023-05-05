@@ -30,73 +30,6 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-@app.route("/addemp", methods=['POST'])
-def calculate_salary(exp_yr, edu_lvl, position):
-    # Set base salaries for each position
-    # base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
-    #                  'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
-    
-    # base_salary = base_salaries[position]
-    # if position == "graphic_designer":
-    #     base_salary = 30000
-    #     salary = base_salary + (0.05 * base_salary)
-    # elif position == "web_developer":
-    #     base_salary = 50000
-    #     salary = base_salary + (0.1 * base_salary)
-    # elif position == "marketing_analyst":
-    #     base_salary = 40000
-    #     salary = base_salary + (0.2 * base_salary)
-    # elif position == "content_creator":
-    #     base_salary = 35000
-    #     salary = base_salary + (0.3 * base_salary)
-    # elif position == "digital_marketing_manager":
-    #     base_salary = 70000
-    #     salary = base_salary + (0.4 * base_salary)
-    # elif position == "social_media_manager":
-    #     base_salary = 45000
-    #     salary = base_salary + (0.4 * base_salary)
-    # else:
-    #     raise ValueError("Invalid position")
-    
-    if position == "graphic designer":
-        base_salary = 30000
-        salary = base_salary + (0.05 * base_salary)
-    elif position == "web developer":
-        base_salary = 50000
-        salary = base_salary + (0.1 * base_salary)
-    elif position == "marketing analyst":
-        base_salary = 40000
-        salary = base_salary + (0.2 * base_salary)
-    elif position == "content creator":
-        base_salary = 35000
-        salary = base_salary + (0.3 * base_salary)
-    elif position == "digital marketing manager":
-        base_salary = 70000
-        salary = base_salary + (0.4 * base_salary)
-    elif position == "social media manager":
-        base_salary = 45000
-        salary = base_salary + (0.4 * base_salary)
-    else:
-        raise ValueError("Invalid position")
-    
-    if edu_lvl == "high school":
-        salary = base_salary + (0.05 * base_salary)
-    elif edu_lvl == "associate degree":
-        salary = base_salary + (0.1 * base_salary)
-    elif edu_lvl == "bachelor degree":
-        salary = base_salary + (0.2 * base_salary)
-    elif edu_lvl == "master":
-        salary = base_salary + (0.3 * base_salary)
-    elif edu_lvl == "doctorate":
-        salary = base_salary + (0.4 * base_salary)
-    else:
-        raise ValueError("Invalid education level")
-    
-    # Add experience year bonus if experience year is more than 5
-    if int(exp_yr)> 5:
-        salary += (0.05 * salary)
-
-    return salary
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -107,17 +40,17 @@ def AddEmp():
     location = request.form['location']
     hire_date = request.form['hire_date']
     exp_yr = request.form['exp_yr'] #1-10
-    # edu_lvl = request.form.get['edu_lvl']
-    edu_lvl = request.form['edu_lvl'] #high school,associate's degree,bachelor's degree, master, doctorate
+    edu_lvl = request.form.get['edu_lvl']
+    # edu_lvl = request.form['edu_lvl'] #high school,associate's degree,bachelor's degree, master, doctorate
     position = request.form['position']
      # graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager
     # position = request.form.get['position']
     emp_image_file = request.files['emp_image_file']
 
     #calculate salary
-    salary = calculate_salary(exp_yr, edu_lvl, position)
+    # salary = calculate_salary(exp_yr, edu_lvl, position)
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -125,7 +58,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
