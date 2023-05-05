@@ -23,7 +23,7 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('/templates/ApplyLeaveEmp.html')
+    return render_template('ApplyLeaveEmp.html')
 
 
 @app.route("/about", methods=['POST'])
@@ -90,8 +90,8 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-@app.route("/applyleave", methods=['GET', 'POST'])
-def ApplyLeave():
+@app.route("/ApplyLeaveEmp", methods=['GET', 'POST'])
+def apply_leave():
     emp_id = request.form['emp_id']
     type_leave = request.form['type_leave']
     start_date = request.form['start_date']
