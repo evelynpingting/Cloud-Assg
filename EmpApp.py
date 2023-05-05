@@ -33,15 +33,36 @@ def about():
 # @app.route("/", methods=['POST'])
 def calculate_salary(exp_yr, edu_lvl, position):
     # Set base salaries for each position
-    base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
-                     'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
+    # base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
+    #                  'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
     
-    base_salary = base_salaries[position]
-    if edu_lvl == "high school":
+    # base_salary = base_salaries[position]
+    if position == "graphic_designer":
+        base_salary = 30000
         salary = base_salary + (0.05 * base_salary)
-    elif edu_lvl == "associate's degree":
+    elif position == "web_developer":
+        base_salary = 50000
         salary = base_salary + (0.1 * base_salary)
-    elif edu_lvl == "bachelor's degree":
+    elif position == "marketing_analyst":
+        base_salary = 40000
+        salary = base_salary + (0.2 * base_salary)
+    elif position == "content_creator":
+        base_salary = 35000
+        salary = base_salary + (0.3 * base_salary)
+    elif position == "digital_marketing_manager":
+        base_salary = 70000
+        salary = base_salary + (0.4 * base_salary)
+    elif position == "social_media_manager":
+        base_salary = 45000
+        salary = base_salary + (0.4 * base_salary)
+    else:
+        raise ValueError("Invalid position")
+    
+    if edu_lvl == "high_school":
+        salary = base_salary + (0.05 * base_salary)
+    elif edu_lvl == "associate_degree":
+        salary = base_salary + (0.1 * base_salary)
+    elif edu_lvl == "bachelor_degree":
         salary = base_salary + (0.2 * base_salary)
     elif edu_lvl == "master":
         salary = base_salary + (0.3 * base_salary)
@@ -65,9 +86,10 @@ def AddEmp():
     location = request.form['location']
     hire_date = request.form['hire_date']
     exp_yr = request.form['exp_yr'] #1-10
-    edu_lvl = request.form['edu_lvl'] #high school,associate's degree,bachelor's degree, master, doctorate
-    position = request.form['position'] # graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager
-
+    edu_lvl = request.form.get['edu_lvl']
+    # edu_lvl = request.form['edu_lvl'] #high school,associate's degree,bachelor's degree, master, doctorate
+     # graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager
+    position = request.form.get['position']
     emp_image_file = request.files['emp_image_file']
 
     #calculate salary
@@ -143,6 +165,23 @@ def GetEmployee():
 @app.route("/editInfo", methods = ['GET'])
 def EditEmployee():
     return 
+
+@app.route("/readEmp", methods=['POST'])
+def ReadEmployee():
+    emp_id = request.form['emp_id']
+    cursor = db_conn.cursor()
+    select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+    cursor.execute(select_sql, (emp_id,))
+    employee = cursor.fetchone()
+    cursor.close()
+
+    if employee:
+        # render the employee information in a new HTML page
+        return render_template('EmployeeInfo.html', employee=employee)
+    else:
+        # if the employee ID is not found in the database
+        error_msg = "Employee ID {} not found.".format(emp_id)
+        return render_template('Error.html', error_msg=error_msg)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
