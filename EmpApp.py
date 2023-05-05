@@ -30,7 +30,7 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-@app.route("/", methods=['POST'])
+@app.route("/addemp", methods=['POST'])
 def calculate_salary(exp_yr, edu_lvl, position):
     # Set base salaries for each position
     # base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
@@ -173,7 +173,7 @@ def ApplyLeave():
     # commit the changes to the database
     db_conn.commit()
 
-    return render_template('AddEmp.html')
+    return render_template('ApplyLeaveEmp.html')
 
 @app.route("/getInfo", methods=['GET'])
 def GetEmployee():
