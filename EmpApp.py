@@ -90,7 +90,7 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-@app.route("/ApplyLeaveEmp", methods=['GET', 'POST'])
+@app.route("/ApplyLeaveEmp", methods=['POST'])
 def ApplyLeaveEmp():
     emp_id = request.form['emp_id']
     type_leave = request.form['type_leave']
