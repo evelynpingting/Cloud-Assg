@@ -30,39 +30,60 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-# @app.route("/", methods=['POST'])
+@app.route("/", methods=['POST'])
 def calculate_salary(exp_yr, edu_lvl, position):
     # Set base salaries for each position
     # base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
     #                  'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
     
     # base_salary = base_salaries[position]
-    if position == "graphic_designer":
+    # if position == "graphic_designer":
+    #     base_salary = 30000
+    #     salary = base_salary + (0.05 * base_salary)
+    # elif position == "web_developer":
+    #     base_salary = 50000
+    #     salary = base_salary + (0.1 * base_salary)
+    # elif position == "marketing_analyst":
+    #     base_salary = 40000
+    #     salary = base_salary + (0.2 * base_salary)
+    # elif position == "content_creator":
+    #     base_salary = 35000
+    #     salary = base_salary + (0.3 * base_salary)
+    # elif position == "digital_marketing_manager":
+    #     base_salary = 70000
+    #     salary = base_salary + (0.4 * base_salary)
+    # elif position == "social_media_manager":
+    #     base_salary = 45000
+    #     salary = base_salary + (0.4 * base_salary)
+    # else:
+    #     raise ValueError("Invalid position")
+    
+    if position == "graphic designer":
         base_salary = 30000
         salary = base_salary + (0.05 * base_salary)
-    elif position == "web_developer":
+    elif position == "web developer":
         base_salary = 50000
         salary = base_salary + (0.1 * base_salary)
-    elif position == "marketing_analyst":
+    elif position == "marketing analyst":
         base_salary = 40000
         salary = base_salary + (0.2 * base_salary)
-    elif position == "content_creator":
+    elif position == "content creator":
         base_salary = 35000
         salary = base_salary + (0.3 * base_salary)
-    elif position == "digital_marketing_manager":
+    elif position == "digital marketing manager":
         base_salary = 70000
         salary = base_salary + (0.4 * base_salary)
-    elif position == "social_media_manager":
+    elif position == "social media manager":
         base_salary = 45000
         salary = base_salary + (0.4 * base_salary)
     else:
         raise ValueError("Invalid position")
     
-    if edu_lvl == "high_school":
+    if edu_lvl == "high school":
         salary = base_salary + (0.05 * base_salary)
-    elif edu_lvl == "associate_degree":
+    elif edu_lvl == "associate degree":
         salary = base_salary + (0.1 * base_salary)
-    elif edu_lvl == "bachelor_degree":
+    elif edu_lvl == "bachelor degree":
         salary = base_salary + (0.2 * base_salary)
     elif edu_lvl == "master":
         salary = base_salary + (0.3 * base_salary)
