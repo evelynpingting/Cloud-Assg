@@ -31,7 +31,7 @@ def about():
     return render_template('www.intellipaat.com')
 
 
-@app.route("/AddEmp", methods=['POST'])
+@app.route("/AddEmp", methods=['GET','POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
