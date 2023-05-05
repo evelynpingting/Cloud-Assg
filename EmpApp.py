@@ -92,16 +92,16 @@ def AddEmp():
 
 @app.route("/applyleave", methods=['GET', 'POST'])
 def ApplyLeave():
-    emp_id = request.form['emp_id']
+    emp_id1 = request.form['emp_id1']
     type_leave = request.form['type_leave']
     start_date = request.form['start_date']
     end_date = request.form['end_date']
 
-    insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO emp_leave (emp_id1, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     # execute the insert query with the values obtained from the HTML form
-    cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
+    cursor.execute(insert_sql, (emp_id1, type_leave, start_date, end_date))
 
     # commit the changes to the database
     db_conn.commit()
