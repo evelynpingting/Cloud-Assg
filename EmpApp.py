@@ -23,15 +23,15 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('ApplyLeaveEmp.html')
+    return render_template('MainMenu.html')
 
 
-@app.route("/about", methods=['POST'])
+@app.route("/AboutUs", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/AddEmp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -121,7 +121,7 @@ def GetEmployee():
 def EditEmployee():
     return 
 
-@app.route("/readEmp", methods=['POST'])
+@app.route("/ReadEmp", methods=['POST'])
 def ReadEmployee():
     emp_id = request.form['emp_id']
     cursor = db_conn.cursor()
