@@ -21,7 +21,7 @@ output = {}
 table = 'employee'
 
 
-@app.route("/main", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('MainMenu.html')
 
