@@ -40,7 +40,7 @@ def AddEmp():
     location = request.form['location']
     hire_date = request.form['hire_date']
     exp_yr = request.form['exp_yr'] #1-10
-    edu_lvl = request.form.get['edu_lvl']
+    edu_lvl = request.form['edu_lvl']
     # edu_lvl = request.form['edu_lvl'] #high school,associate's degree,bachelor's degree, master, doctorate
     position = request.form['position']
      # graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager
