@@ -90,23 +90,33 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
+# @app.route("/ApplyLeaveEmp", methods=['GET','POST'])
 @app.route("/ApplyLeaveEmp", methods=['POST'])
 def ApplyLeaveEmp():
-    emp_id = request.form['emp_id']
-    type_leave = request.form['type_leave']
-    start_date = request.form['start_date']
-    end_date = request.form['end_date']
+    try:
+        emp_id = request.form['emp_id']
+        type_leave = request.form['type_leave']
+        start_date = request.form['start_date']
+        end_date = request.form['end_date']
 
-    insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
-    cursor = db_conn.cursor()
+        insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
+        cursor = db_conn.cursor()
 
-    # execute the insert query with the values obtained from the HTML form
-    cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
+        # execute the insert query with the values obtained from the HTML form
+        cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
 
-    # commit the changes to the database
-    db_conn.commit()
+        # commit the changes to the database
+        db_conn.commit()
 
-    return render_template('ApplyLeaveEmp.html')
+        return render_template('ApplyLeaveEmp.html')
+
+    except Exception as e:
+        # handle the error and rollback changes
+        db_conn.rollback()
+        return "Error: " + str(e)
+    finally:
+        # close the database connection
+        cursor.close()
 
 @app.route("/getInfo", methods=['GET'])
 def GetEmployee():
