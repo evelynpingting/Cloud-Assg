@@ -8,7 +8,9 @@
 
 		<h1 style="color: DodgerBlue">Employee Database</h1>
 
+
 		<body bgcolor="lightgrey">
+			<a href="ApplyLeaveEmp.html"><button>Apply Leave</button></a>
 
 			<form action="/addemp" autocomplete="on" method = "POST" enctype="multipart/form-data">
 
@@ -27,7 +29,26 @@
 				Hire Date: <br> <input style="height:25px;font-size:14pt;color:grey;" type="date" name="hire_date"><br><br>
 
 				Years experience:<br> <input style="height:25px;font-size:14pt;color:grey;" type="number" name="exp_yr"><br><br>
-
+				
+				<!-- high school,associate's degree,bachelor's degree, master, doctorate  -->
+				<!-- <label for="edu_lvl">Choose education level:</label>
+				<select id="edu_lvl" name="edu_lvl">
+					<option value="high_school">High school</option>
+					<option value="associate_degree">Associate's degree</option>
+					<option value="bachelor_degree">Bachelor's degree</option>
+					<option value="master">Master</option>
+					<option value="doctorate">Doctorate</option>
+				</select> -->
+				<!-- graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager -->
+				<!-- <label for="position">Choose position:</label>
+				<select id="position" name="position">
+					<option value="graphic_designer">Graphic designer</option>
+					<option value="web_developer">Web developer</option>
+					<option value="marketing_analyst">Marketing analyst</option>
+					<option value="content_creator">Content creator</option>
+					<option value="digital_marketing_manager">Digital marketing manager</option>
+					<option value="social_media_manager">Social media manager</option>
+				</select> -->
 				Education Level: <br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="edu_lvl"><br><br>
 
 				Position: <br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="position"><br><br>

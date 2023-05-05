@@ -23,13 +23,14 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AddEmp.html')
+    return render_template('ApplyLeaveEmp.html')
 
 
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
 
+# @app.route("/", methods=['POST'])
 def calculate_salary(exp_yr, edu_lvl, position):
     # Set base salaries for each position
     base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
@@ -119,12 +120,29 @@ def ApplyLeave():
     start_date = request.form['start_date']
     end_date = request.form['end_date']
 
-    insert_sql = "INSERT INTO emp_leave VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
+    # execute the insert query with the values obtained from the HTML form
+    cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
 
+    # commit the changes to the database
+    db_conn.commit()
 
     return render_template('AddEmp.html')
+
+@app.route("/getInfo", methods=['GET'])
+def GetEmployee():
+    emp_id = request.form['emp_id']
+    type_leave = request.form['type_leave']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
+
+    retrieve_sql = "SELECT FROM employee "
+
+@app.route("/editInfo", methods = ['GET'])
+def EditEmployee():
+    return 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
