@@ -91,7 +91,7 @@ def AddEmp():
     return render_template('AddEmpOutput.html', name=emp_name)
 
 @app.route("/ApplyLeaveEmp", methods=['GET', 'POST'])
-def apply_leave():
+def ApplyleaveEmp():
     emp_id = request.form['emp_id']
     type_leave = request.form['type_leave']
     start_date = request.form['start_date']
