@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from pymysql import connections
+from wtforms import Form, SelectField, IntegerField, validators
 import os
 import boto3
 from config import *
@@ -29,6 +30,10 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
+class SalaryForm(Form):
+    position = SelectField('Position', choices=[('entry', 'Entry Level'), ('mid', 'Mid Level'), ('senior', 'Senior Level')], validators=[validators.InputRequired()])
+    education = SelectField('Education Level', choices=[('high', 'High School'), ('college', 'College'), ('grad', 'Graduate')], validators=[validators.InputRequired()])
+    experience = IntegerField('Years of Experience', validators=[validators.InputRequired(), validators.NumberRange(min=0, max=50)])
 
 @app.route("/AddEmp", methods=['GET','POST'])
 def AddEmp():
@@ -183,6 +188,70 @@ def ReadAllEmployees():
     else:
         # if no employees found in the database
         error_msg = "No employees found."
+        return render_template('Error.html', error_msg=error_msg)
+    
+@app.route("/UpdateEmp", methods=['POST'])
+def UpdateEmployee():
+    emp_id = request.form['emp_id']
+
+    # Retrieve the employee from the database
+    cursor = db_conn.cursor()
+    select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+    cursor.execute(select_sql, (emp_id,))
+    employee = cursor.fetchone()
+
+    if employee:
+        # Update the specific employee information
+        if 'first_name' in request.form:
+            first_name = request.form['first_name']
+            employee['first_name'] = first_name
+
+        if 'last_name' in request.form:
+            last_name = request.form['last_name']
+            employee['last_name'] = last_name
+
+        if 'pri_skill' in request.form:
+            pri_skill = request.form['pri_skill']
+            employee['pri_skill'] = pri_skill
+
+        if 'location' in request.form:
+            location = request.form['location']
+            employee['location'] = location
+
+        if 'hire_date' in request.form:
+            hire_date = request.form['hire_date']
+            employee['hire_date'] = hire_date
+
+        if 'exp_year' in request.form:
+            exp_year = request.form['exp_year']
+            employee['exp_year'] = exp_year
+
+        if 'edu_lvl' in request.form:
+            edu_lvl = request.form['edu_lvl']
+            employee['edu_lvl'] = edu_lvl
+
+        if 'position' in request.form:
+            position = request.form['position']
+            employee['position'] = position
+
+        if 'salary' in request.form:
+            salary = request.form['salary']
+            employee['salary'] = salary
+
+     
+
+        # Perform the update in the database
+        update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
+        cursor.execute(update_sql, (employee['first_name'], employee['last_name'], employee['pri_skill'], employee['location'], employee['hire_date'],employee['exp_year'], employee['edu_lvl'], employee['position'], employee['salary'],emp_id))
+        db_conn.commit()
+
+        cursor.close()
+
+        # Redirect the user to a success page or display a success message
+        return render_template('UpdateSuccess.html')
+    else:
+        # Handle the case when employee is not found
+        error_msg = "Employee ID {} not found.".format(emp_id)
         return render_template('Error.html', error_msg=error_msg)
 
 if __name__ == '__main__':
