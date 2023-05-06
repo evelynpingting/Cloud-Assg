@@ -133,7 +133,7 @@ def ApplyLeaveEmp():
                 insert_sql = "INSERT INTO emp_leave (emp_id, emp_name, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
 
                 # execute the insert query with the values obtained from the HTML form
-                cursor.execute(insert_sql, (emp_id, emp_name, type_leave, start_date, end_date))
+                cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
 
                 # commit the changes to the database
                 db_conn.commit()
@@ -438,6 +438,8 @@ def AddAttendance():
         cursor.execute(insert_sql, (emp_id, att_date, first_name, last_name, time))
         db_conn.commit()
         cursor.close()
+        return render_template('AddAttendance.html')
+    else:
         return render_template('AddAttendance.html')
 
 
