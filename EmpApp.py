@@ -209,7 +209,7 @@ def CheckEmployee():
         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(select_sql, (emp_id,))
         employee = cursor.fetchone()
-        cursor.close()
+        #cursor.close()
 
         if employee:
             # Convert the tuple to a dictionary
