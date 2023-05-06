@@ -328,89 +328,89 @@ def CheckEmployee():
         return render_template('UpdateEmp.html')
     
     
-@app.route("/UpdateEmpOld", methods=['GET', 'POST'])
-def UpdateEmployee():
-    if request.method == 'POST':
-        emp_id = request.form['emp_id']
-        cursor = db_conn.cursor()
-        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        cursor.execute(select_sql, (emp_id,))
-        employee = cursor.fetchone()
+# @app.route("/UpdateEmpOld", methods=['GET', 'POST'])
+# def UpdateEmployee():
+#     if request.method == 'POST':
+#         emp_id = request.form['emp_id']
+#         cursor = db_conn.cursor()
+#         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+#         cursor.execute(select_sql, (emp_id,))
+#         employee = cursor.fetchone()
         
     
-        # emp_id = request.form['emp_id']
+#         # emp_id = request.form['emp_id']
 
-        # Retrieve the employee from the database
+#         # Retrieve the employee from the database
 
-        if employee:
-            # Convert the tuple to a dictionary
-            employee_dict = {
-                'emp_id': employee[0],
-                'first_name': employee[1],
-                'last_name': employee[2],
-                'pri_skill': employee[3],
-                'location': employee[4],
-                'hire_date': employee[5],
-                'exp_year': employee[6],
-                'edu_lvl': employee[7],
-                'position': employee[8],
-                'salary': employee[9]
-            }
+#         if employee:
+#             # Convert the tuple to a dictionary
+#             employee_dict = {
+#                 'emp_id': employee[0],
+#                 'first_name': employee[1],
+#                 'last_name': employee[2],
+#                 'pri_skill': employee[3],
+#                 'location': employee[4],
+#                 'hire_date': employee[5],
+#                 'exp_year': employee[6],
+#                 'edu_lvl': employee[7],
+#                 'position': employee[8],
+#                 'salary': employee[9]
+#             }
 
-            # Update the specific employee information
-            if 'first_name' in request.form:
-                employee_dict['first_name'] = request.form['first_name']
+#             # Update the specific employee information
+#             if 'first_name' in request.form:
+#                 employee_dict['first_name'] = request.form['first_name']
 
-            if 'last_name' in request.form:
-                employee_dict['last_name'] = request.form['last_name']
+#             if 'last_name' in request.form:
+#                 employee_dict['last_name'] = request.form['last_name']
 
-            if 'pri_skill' in request.form:
-                employee_dict['pri_skill'] = request.form['pri_skill']
+#             if 'pri_skill' in request.form:
+#                 employee_dict['pri_skill'] = request.form['pri_skill']
 
-            if 'location' in request.form:
-                employee_dict['location'] = request.form['location']
+#             if 'location' in request.form:
+#                 employee_dict['location'] = request.form['location']
 
-            if 'hire_date' in request.form:
-                employee_dict['hire_date'] = request.form['hire_date']
+#             if 'hire_date' in request.form:
+#                 employee_dict['hire_date'] = request.form['hire_date']
 
-            if 'exp_year' in request.form:
-                employee_dict['exp_year'] = request.form['exp_year']
+#             if 'exp_year' in request.form:
+#                 employee_dict['exp_year'] = request.form['exp_year']
 
-            if 'edu_lvl' in request.form:
-                employee_dict['edu_lvl'] = request.form['edu_lvl']
+#             if 'edu_lvl' in request.form:
+#                 employee_dict['edu_lvl'] = request.form['edu_lvl']
 
-            if 'position' in request.form:
-                employee_dict['position'] = request.form['position']
+#             if 'position' in request.form:
+#                 employee_dict['position'] = request.form['position']
 
-            if 'salary' in request.form:
-                employee_dict['salary'] = request.form['salary']
+#             if 'salary' in request.form:
+#                 employee_dict['salary'] = request.form['salary']
 
-            # Perform the update in the database
-            update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
-            cursor.execute(update_sql, (
-                employee_dict['first_name'],
-                employee_dict['last_name'],
-                employee_dict['pri_skill'],
-                employee_dict['location'],
-                employee_dict['hire_date'],
-                employee_dict['exp_year'],
-                employee_dict['edu_lvl'],
-                employee_dict['position'],
-                employee_dict['salary'],
-                emp_id
-            ))
-            db_conn.commit()
+#             # Perform the update in the database
+#             update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
+#             cursor.execute(update_sql, (
+#                 employee_dict['first_name'],
+#                 employee_dict['last_name'],
+#                 employee_dict['pri_skill'],
+#                 employee_dict['location'],
+#                 employee_dict['hire_date'],
+#                 employee_dict['exp_year'],
+#                 employee_dict['edu_lvl'],
+#                 employee_dict['position'],
+#                 employee_dict['salary'],
+#                 emp_id
+#             ))
+#             db_conn.commit()
 
-            cursor.close()
+#             cursor.close()
 
-            # Redirect the user to a success page or display a success message
-            return render_template('UpdateSuccess.html')
-        else:
-            # Handle the case when employee is not found
-            error_msg = "Employee ID {} not found.".format(emp_id)
-            return render_template('Error.html', error_msg=error_msg)
-    else:
-        return render_template('UpdateEmp.html')
+#             # Redirect the user to a success page or display a success message
+#             return render_template('UpdateSuccess.html')
+#         else:
+#             # Handle the case when employee is not found
+#             error_msg = "Employee ID {} not found.".format(emp_id)
+#             return render_template('Error.html', error_msg=error_msg)
+#     else:
+#         return render_template('UpdateEmp.html')
     
 
 @app.route("/UpdateSuccess", methods=['GET','POST'])
