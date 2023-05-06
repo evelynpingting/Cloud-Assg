@@ -4,13 +4,9 @@
     <title>Update Employee</title>
 </head>
 <body>
-    <h1>Update Employee</h1>
+    <h1>Update Employee: {{ emp_id }}</h1>
 
     <form action="/UpdateEmp" method="POST">
-		<h4>Enter the employee id that you wish to update their information</h4>
-        <label for="emp_id">Employee ID:</label>
-        <input type="number" id="emp_id" name="emp_id" required><br><br>
-
 		<h4>Insert their latest information in order to update</h4>
 
         <label for="first_name">First Name:</label>
