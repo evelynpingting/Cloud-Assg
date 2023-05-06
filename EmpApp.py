@@ -221,7 +221,7 @@ def CheckEmployee():
     else:
         return render_template('CheckIdUpdate.html')
     
-@app.route("/UpdateEmp", methods=['GET','POST'])
+@app.route("/UpdateEmp", methods=['GET', 'POST'])
 def UpdateEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
@@ -233,46 +233,62 @@ def UpdateEmployee():
         employee = cursor.fetchone()
 
         if employee:
+            # Convert the tuple to a dictionary
+            employee_dict = {
+                'emp_id': employee[0],
+                'first_name': employee[1],
+                'last_name': employee[2],
+                'pri_skill': employee[3],
+                'location': employee[4],
+                'hire_date': employee[5],
+                'exp_year': employee[6],
+                'edu_lvl': employee[7],
+                'position': employee[8],
+                'salary': employee[9]
+            }
+
             # Update the specific employee information
             if 'first_name' in request.form:
-                first_name = request.form['first_name']
-                employee['first_name'] = first_name
+                employee_dict['first_name'] = request.form['first_name']
 
             if 'last_name' in request.form:
-                last_name = request.form['last_name']
-                employee['last_name'] = last_name
+                employee_dict['last_name'] = request.form['last_name']
 
             if 'pri_skill' in request.form:
-                pri_skill = request.form['pri_skill']
-                employee['pri_skill'] = pri_skill
+                employee_dict['pri_skill'] = request.form['pri_skill']
 
             if 'location' in request.form:
-                location = request.form['location']
-                employee['location'] = location
+                employee_dict['location'] = request.form['location']
 
             if 'hire_date' in request.form:
-                hire_date = request.form['hire_date']
-                employee['hire_date'] = hire_date
+                employee_dict['hire_date'] = request.form['hire_date']
 
             if 'exp_year' in request.form:
-                exp_year = request.form['exp_year']
-                employee['exp_year'] = exp_year
+                employee_dict['exp_year'] = request.form['exp_year']
 
             if 'edu_lvl' in request.form:
-                edu_lvl = request.form['edu_lvl']
-                employee['edu_lvl'] = edu_lvl
+                employee_dict['edu_lvl'] = request.form['edu_lvl']
 
             if 'position' in request.form:
-                position = request.form['position']
-                employee['position'] = position
+                employee_dict['position'] = request.form['position']
 
             if 'salary' in request.form:
-                salary = request.form['salary']
-                employee['salary'] = salary
+                employee_dict['salary'] = request.form['salary']
 
             # Perform the update in the database
             update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
-            cursor.execute(update_sql, (employee['first_name'], employee['last_name'], employee['pri_skill'], employee['location'], employee['hire_date'],employee['exp_year'], employee['edu_lvl'], employee['position'], employee['salary'],emp_id))
+            cursor.execute(update_sql, (
+                employee_dict['first_name'],
+                employee_dict['last_name'],
+                employee_dict['pri_skill'],
+                employee_dict['location'],
+                employee_dict['hire_date'],
+                employee_dict['exp_year'],
+                employee_dict['edu_lvl'],
+                employee_dict['position'],
+                employee_dict['salary'],
+                emp_id
+            ))
             db_conn.commit()
 
             cursor.close()
