@@ -447,33 +447,33 @@ def DeleteEmployee():
         return render_template('DeleteEmp.html')
 
 
-@app.route("/AddAttendance", methods=['GET','POST'])
+@app.route("/AddAttendance")
 def AddAttendance():
-    if request.method == "POST":
-        date = datetime.now().strftime("%Y-%m-%d")
-        emp_id = request.form['emp_id']
-        time = datetime.now("%H:%M:%S")
+    # if request.method == "POST":
+    date = datetime.now().strftime("%Y-%m-%d")
+    emp_id = request.form['emp_id']
+    time = datetime.now("%H:%M:%S")
 
-        # Check if the employee ID exists in the database
-        cursor = db_conn.cursor()
-        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        cursor.execute(select_sql, (emp_id,))
-        employee = cursor.fetchone()
+    # Check if the employee ID exists in the database
+    cursor = db_conn.cursor()
+    select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+    cursor.execute(select_sql, (emp_id,))
+    employee = cursor.fetchone()
 
-        if employee:
-            insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (%s, %s, %s)"
-            cursor.execute(insert_sql, (date, emp_id, time))
-            db_conn.commit()
-            cursor.close()
-            success_msg = "Attendance added successfully.".format(emp_id)
-            return render_template('ReadEmp.html', success_msg=success_msg)
-        
-        else:
-            error_msg = "Employee ID {} not found.".format(emp_id)
-            return render_template('Error.html', error_msg=error_msg)
+    if employee:
+        insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (%s, %s, %s)"
+        cursor.execute(insert_sql, (date, emp_id, time))
+        db_conn.commit()
+        cursor.close()
+        success_msg = "Attendance added successfully.".format(emp_id)
+        return render_template('ReadEmp.html', success_msg=success_msg)
     
     else:
-        return render_template('ReadEmp.html')
+        error_msg = "Employee ID {} not found.".format(emp_id)
+        return render_template('Error.html', error_msg=error_msg)
+    
+    # else:
+    #     return render_template('ReadEmp.html')
  
 
 if __name__ == '__main__':
