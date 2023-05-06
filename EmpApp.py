@@ -415,7 +415,7 @@ def AddAttendance():
 @app.route("/CheckAttendanceRecord", methods=['GET'])
 def CheckAttendanceRecord():
     # get the date from the query parameter
-    date = request.args.get('date')
+    date =  request.form['date']
     date = datetime.strptime(date, "%Y-%m-%d").date()
 
     # retrieve the attendance record from the database
