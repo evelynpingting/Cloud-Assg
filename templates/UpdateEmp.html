@@ -26,17 +26,31 @@
         <input type="text" id="location" name="location"><br><br>
 
 		<label for="hire_date">Hire Date:</label>
-        <input type="text" id="hire_date" name="hire_date"><br><br>
+        <input type="date" id="hire_date" name="hire_date"><br><br>
 
 		<label for="exp_year">Years of Experience:</label>
         <input type="text" id="exp_year" name="exp_year"><br><br>
 
-		<label for="edu_lvl">Education Level:</label>
-        <input type="text" id="edu_lvl" name="edu_lvl"><br><br>
-
-		<label for="position">Position:</label>
-        <input type="text" id="position" name="position"><br><br>
-
+		<label for="edu_lvl">Choose education level:</label>
+        <select id="edu_lvl" name="edu_lvl">
+            <option value="" disabled selected>Select an option</option>
+            <option value="high school">High school</option>
+            <option value="associate degree">Associate's degree</option>
+            <option value="bachelor degree">Bachelor's degree</option>
+            <option value="master">Master</option>
+            <option value="phd">Doctorate</option>
+        </select>
+				
+		<label for="position">Choose position:</label>
+        <select id="position" name="position">
+            <option value="" disabled selected>Select an option</option>
+            <option value="graphic designer">Graphic designer</option>
+            <option value="web developer">Web developer</option>
+            <option value="marketing analyst">Marketing analyst</option>
+            <option value="content creator">Content creator</option>
+            <option value="digital marketing manager">Digital marketing manager</option>
+            <option value="social media manager">Social media manager</option>
+        </select>
 		<label for="salary">Salary:</label>
         <input type="text" id="salary" name="salary"><br><br>
 
