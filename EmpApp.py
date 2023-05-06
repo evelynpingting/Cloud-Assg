@@ -426,7 +426,7 @@ def DeleteEmployee():
 @app.route("/AddAttendance", methods=['GET','POST'])
 def AddAttendance():
     if request.method == "POST":
-        att_date = datetime.now().strftime("%Y-%m-%d")
+        date = datetime.now().strftime("%Y-%m-%d")
         emp_id = request.form['emp_id']
         time = datetime.now("%H:%M:%S")
 
@@ -437,8 +437,8 @@ def AddAttendance():
         employee = cursor.fetchone()
 
         if employee:
-            insert_sql = "INSERT INTO attendance (att_date, emp_id, time) VALUES (%s, %s, %s)"
-            cursor.execute(insert_sql, (att_date, emp_id, time))
+            insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (%s, %s, %s)"
+            cursor.execute(insert_sql, (date, emp_id, time))
             db_conn.commit()
             cursor.close()
             success_msg = "Attendance added successfully.".format(emp_id)
