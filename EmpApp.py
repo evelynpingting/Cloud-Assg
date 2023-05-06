@@ -148,15 +148,15 @@ def ReadEmployee():
         if employee:
             # Extract the employee information
             emp_info = {
-                'first_name': employee['first_name'],
-                'last_name': employee['last_name'],
-                'pri_skill': employee['pri_skill'],
-                'location': employee['location'],
-                'hire_date': employee['hire_date'],
-                'exp_year': employee['exp_yr'],
-                'edu_lvl': employee['edu_lvl'],
-                'position': employee['position'],
-                'salary': employee['salary']
+                'first_name': employee[1],
+                'last_name': employee[2],
+                'pri_skill': employee[3],
+                'location': employee[4],
+                'hire_date': employee[5],
+                'exp_year': employee[6],
+                'edu_lvl': employee[7],
+                'position': employee[8],
+                'salary': employee[9]
             }
 
             # render the employee information in the EmployeeInfo.html template
