@@ -414,24 +414,26 @@ def AddAttendance():
     
 @app.route("/CheckAttendanceRecord", methods=['GET','POST'])
 def CheckAttendanceRecord():
-    # get the date from the query parameter
-    date =  request.form['date']
-    date = datetime.strptime(date, "%Y-%m-%d").date()
+    if request.method == "POST":
+        # get the date from the query parameter
+        date =  request.form['date']
+        date = datetime.strptime(date, "%Y-%m-%d").date()
 
-    # retrieve the attendance record from the database
-    cursor = db_conn.cursor()
-    select_sql = "SELECT employeeAttendance.date, employeeAttendance.emp_id, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
-    cursor.execute(select_sql, (date,))
-    attendance_info = cursor.fetchall()
-    cursor.close()
-
-    if attendance_info:
-        # render the attendance record in the AttendanceInfo.html template
-        return render_template('AttendanceInfo.html', attendance_info=attendance_info)
+        # retrieve the attendance record from the database
+        cursor = db_conn.cursor()
+        select_sql = "SELECT employeeAttendance.date, employeeAttendance.emp_id, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
+        cursor.execute(select_sql, (date,))
+        attendance_info = cursor.fetchall()
+        cursor.close()
+        if attendance_info:
+            # render the attendance record in the AttendanceInfo.html template
+            return render_template('AttendanceInfo.html', attendance_info=attendance_info)
+        else:
+            # if no attendance record found in the database
+            error_msg = "No employees found."
+            return render_template('Error.html', error_msg=error_msg)
     else:
-        # if no attendance record found in the database
-        error_msg = "No employees found."
-        return render_template('Error.html', error_msg=error_msg)
+        return render_template('CheckAttendanceRecord.html')
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
