@@ -227,10 +227,7 @@ def UpdateEmployee():
         # emp_id = request.form['emp_id']
 
         # Retrieve the employee from the database
-        cursor = db_conn.cursor()
-        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        cursor.execute(select_sql, (emp_id,))
-        employee = cursor.fetchone()
+       
 
         if employee:
             # Convert the tuple to a dictionary
@@ -301,7 +298,11 @@ def UpdateEmployee():
             return render_template('Error.html', error_msg=error_msg)
     else:
         emp_id = request.form['emp_id']
-        return render_template('UpdateEmp.html')
+        cursor = db_conn.cursor()
+        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+        cursor.execute(select_sql, (emp_id,))
+        employee = cursor.fetchone()
+        return render_template('UpdateEmp.html',employee=employee)
 
 @app.route("/UpdateSuccess", methods=['GET','POST'])
 def UpdateSuccess():
