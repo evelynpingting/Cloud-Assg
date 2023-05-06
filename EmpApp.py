@@ -305,9 +305,9 @@ def UpdateEmployee():
 @app.route("/UpdateSuccess", methods=['GET','POST'])
 def UpdateSuccess():
     if request.method == 'POST':
-        return render_template('UpdateEmp.html')
+        return render_template('UpdateSucess.html')
     else:
-        return render_template('UpdateEmp.html')
+        return render_template('UpdateSuccess.html')
     
 
 if __name__ == '__main__':
