@@ -136,7 +136,7 @@ def ApplyLeaveEmp():
                 # commit the changes to the database
                 db_conn.commit()
 
-                return render_template('ApplyLeaveSuccess.html',emp_id=id,type_leave=type_leave,start_date=start_date,end_date=end_date)
+                return render_template('ApplyLeaveSuccess.html',emp_id=emp_id,type_leave=type_leave,start_date=start_date,end_date=end_date)
             else:
                 # Handle the case when employee is not found
                 error_msg = "Employee ID {} not found.".format(emp_id)
@@ -433,7 +433,7 @@ def AddAttendance():
         time = request.form['time']
         cursor = db_conn.cursor()
         insert_sql = "INSERT INTO attendance (att_date, emp_id, first_name,last_name,time) VALUES (%s, %s, %s,%s,%s)"
-        cursor.execute(insert_sql, (emp_id, att_date, att_status))
+        cursor.execute(insert_sql, (emp_id, att_date, first_name, last_name, time))
         db_conn.commit()
         cursor.close()
         return render_template('AddAttendance.html')
