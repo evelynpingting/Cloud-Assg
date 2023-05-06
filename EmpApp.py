@@ -167,6 +167,23 @@ def ReadEmployee():
             return render_template('Error.html', error_msg=error_msg)
     else:
         return render_template('ReadEmp.html')
+    
+
+@app.route("/AllEmpInfo", methods=['GET','POST'])
+def ReadAllEmployees():
+    cursor = db_conn.cursor()
+    select_sql = "SELECT * FROM employee"
+    cursor.execute(select_sql)
+    employees = cursor.fetchall()
+    cursor.close()
+
+    if employees:
+        # render the employee information in the EmployeeInfo.html template
+        return render_template('AllEmpInfo.html', employees=employees)
+    else:
+        # if no employees found in the database
+        error_msg = "No employees found."
+        return render_template('Error.html', error_msg=error_msg)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
