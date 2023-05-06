@@ -376,7 +376,7 @@ def AddAttendance():
         employee = cursor.fetchone()
 
         if employee:
-            insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (%s, %s, %s)"
+            insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (DATE(%s), %s, TIME(%s))"
             cursor.execute(insert_sql, (date, emp_id, time))
             db_conn.commit()
             cursor.close()
