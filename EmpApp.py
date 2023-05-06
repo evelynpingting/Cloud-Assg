@@ -213,7 +213,7 @@ def CheckEmployee():
 
         if employee:
             # Render the update page with the employee ID
-            return render_template('UpdateEmp.html', employee_id=emp_id)
+            return render_template('UpdateEmp.html', emp_id=emp_id)
         else:
             # Handle the case when employee is not found
             error_msg = "Employee ID {} not found.".format(emp_id)
