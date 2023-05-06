@@ -396,6 +396,7 @@ def AddAttendance():
 def CheckAttendanceRecord():
     # get the date from the query parameter
     date = request.form('date')
+    date = datetime.now().strftime("%Y-%m-%d")
 
     # retrieve the attendance record from the database
     cursor = db_conn.cursor()
@@ -405,7 +406,7 @@ def CheckAttendanceRecord():
     cursor.close()
 
     if attendance_info:
-        # render the attendance record in the EmployeeInfo.html template
+        # render the attendance record in the AttendanceInfo.html template
         return render_template('AttendanceInfo.html', attendance_info=attendance_info)
     else:
         # if no attendance record found in the database
