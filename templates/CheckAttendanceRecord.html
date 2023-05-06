@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Attendance Record</title>
+	<style>
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		/* style the input fields */
+		input[type="number"] {
+			width: 50px;
+			padding: 5px;
+			border: 2px solid #ccc;
+			border-radius: 5px;
+			margin: 5px;
+			text-align: center;
+			font-size: 16px;
+		}
+
+		label {
+			font-size: 18px;
+			margin: 5px;
+		}
+
+		/* style the search button */
+		button[type="submit"] {
+			background-color: dodgerblue;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			cursor: pointer;
+		}
+
+		button[type="submit"]:hover {
+			background-color: deepskyblue;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Employee Attendance Record</h1>
+		<form action="/CheckAttendanceRecord" method="GET">
+			<label for="year">Year:</label>
+			<input type="number" id="year" name="year" min="1900" max="2100" required>
+
+			<label for="month">Month:</label>
+			<input type="number" id="month" name="month" min="1" max="12" required>
+
+			<label for="day">Day:</label>
+			<input type="number" id="day" name="day" min="1" max="31" required>
+
+			<button type="submit">Search Date</button>
+		</form>
+	</div>
+</body>
+</html>

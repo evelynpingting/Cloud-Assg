@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Attendance Form</title>
+	<title>Employee Information</title>
 </head>
-<body>
-  <h1>Attendance Form</h1>
-  <form method="POST" action="/submit_attendance">
-    <label for="employee_id">Employee ID:</label>
-    <input type="text" id="employee_id" name="employee_id" required><br><br>
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required><br><br>
-    <label for="status">Status:</label>
-    <select id="status" name="status" required>
-      <option value="">Select an option</option>
-      <option value="Present">Present</option>
-      <option value="Absent">Absent</option>
-      <option value="Late">Late</option>
-    </select><br><br>
-    <input type="submit" value="Submit">
-  </form>
-</body>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+
+		<body bgcolor="lightgrey">
+      <h1>Attendance Record</h1>
+      {% if attendance_info %}
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Employee ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for attendance in attendance_info %}
+              <tr>
+                <td>{{ attendance[0] }}</td>
+                <td>{{ attendance[1] }}</td>
+                <td>{{ attendance[2] }}</td>
+                <td>{{ attendance[3] }}</td>
+                <td>{{ attendance[4] }}</td>
+                <td>{{ attendance[5] }}</td>
+                <td>{{ attendance[6] }}</td>
+                <td>{{ attendance[7] }}</td>
+                <td>{{ attendance[8] }}</td>
+                <td>{{ attendance[9] }}</td>
+                <td>{{ attendance[10] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No employees found.</p>
+      {% endif %}
+			<a href="/">Back to home</a>
+		</body>
+
+	</font>
+</center>
+
 </html>
-
-
-
-
-
-
-

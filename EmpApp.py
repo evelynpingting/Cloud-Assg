@@ -392,7 +392,26 @@ def AddAttendance():
     else:
         return render_template('AddAttendance.html')
  
+@app.route("/CheckAttendanceRecord", methods=['GET'])
+def CheckAttendanceRecord():
+    # get the date from the query parameter
+    date = request.form('date')
 
+    # retrieve the attendance record from the database
+    cursor = db_conn.cursor()
+    select_sql = "SELECT employeeAttendance.date, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
+    cursor.execute(select_sql, (date,))
+    attendance_info = cursor.fetchall()
+    cursor.close()
+
+    if attendance_info:
+        # render the attendance record in the EmployeeInfo.html template
+        return render_template('AttendanceInfo.html', attendance_info=attendance_info)
+    else:
+        # if no attendance record found in the database
+        error_msg = "No employees found."
+        return render_template('Error.html', error_msg=error_msg)
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
 
