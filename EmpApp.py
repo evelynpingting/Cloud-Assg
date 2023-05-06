@@ -123,20 +123,22 @@ def ApplyLeaveEmp():
             employee = cursor.fetchone()
             
             if employee:
-                # emp_name = employee[1]
+                first_name = employee[1]
+                last_name = employee[2]
+                emp_name = f"{first_name} {last_name}"
                 type_leave = request.form['type_leave']
                 start_date = request.form['start_date']
                 end_date = request.form['end_date']
 
-                insert_sql = "INSERT INTO emp_leave (emp_id,type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
+                insert_sql = "INSERT INTO emp_leave (emp_id, emp_name, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
 
                 # execute the insert query with the values obtained from the HTML form
-                cursor.execute(insert_sql, (emp_id,type_leave, start_date, end_date))
+                cursor.execute(insert_sql, (emp_id, emp_name, type_leave, start_date, end_date))
 
                 # commit the changes to the database
                 db_conn.commit()
 
-                return render_template('ApplyLeaveSuccess.html',emp_id=emp_id,type_leave=type_leave,start_date=start_date,end_date=end_date)
+                return render_template('ApplyLeaveSuccess.html',emp_id=emp_id,emp_name=emp_name,type_leave=type_leave,start_date=start_date,end_date=end_date)
             else:
                 # Handle the case when employee is not found
                 error_msg = "Employee ID {} not found.".format(emp_id)
