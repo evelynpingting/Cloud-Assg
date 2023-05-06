@@ -4,29 +4,32 @@
 <head>
 	<title>Retrieve Employee Information</title>
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Employee Information</h1>
+<body>
+	<center>
+		<font color="black" size="4" style="font-family: avenir">
 
-		<body bgcolor="lightgrey">
+			<h1 style="color: DodgerBlue">Employee Information</h1>
 
-			<form action="/ReadEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+			<body bgcolor="lightgrey">
 
-				<h4 style="color: DodgerBlue">Input the employee ID that you wish to retrieve full information</h4>
+				<form action="/ReadEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
 
-				Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id"
-					autofocus size="40"><br><br>
+					<h4 style="color: DodgerBlue">Input the employee ID that you wish to retrieve full information</h4>
 
-				<button type="submit"
-					style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">RETRIEVE
-					EMPLOYEE</button>
+					Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number"
+						name="emp_id" autofocus size="40"><br><br>
 
-			</form>
-			<a href="/"><input type="button" value="Back to home"></a>
-		</body>
+					<button type="submit"
+						style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">RETRIEVE
+						EMPLOYEE</button>
 
-	</font>
-</center>
+				</form>
+				<a href="/"><input type="button" value="Back to home"></a>
+			</body>
+
+		</font>
+	</center>
+</body>
 
 </html>

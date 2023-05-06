@@ -135,7 +135,7 @@ def GetEmployee():
 def EditEmployee():
     return 
 
-@app.route("/ReadEmp", methods=['GET','POST'])
+@app.route("/ReadEmp", methods=['GET', 'POST'])
 def ReadEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
@@ -146,8 +146,21 @@ def ReadEmployee():
         cursor.close()
 
         if employee:
-            # render the employee information in a new HTML page
-            return render_template('EmployeeInfo.html', employee=employee)
+            # Extract the employee information
+            emp_info = {
+                'first_name': employee['first_name'],
+                'last_name': employee['last_name'],
+                'pri_skill': employee['pri_skill'],
+                'location': employee['location'],
+                'hire_date': employee['hire_date'],
+                'exp_year': employee['exp_yr'],
+                'edu_lvl': employee['edu_lvl'],
+                'position': employee['position'],
+                'salary': employee['salary']
+            }
+
+            # render the employee information in the EmployeeInfo.html template
+            return render_template('EmployeeInfo.html', **emp_info)
         else:
             # if the employee ID is not found in the database
             error_msg = "Employee ID {} not found.".format(emp_id)
