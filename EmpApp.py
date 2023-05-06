@@ -374,31 +374,31 @@ def UpdateSuccess():
     else:
         return render_template('UpdateSuccess.html')
 
-# @app.route("/DeleteEmp", methods=['POST'])
-# def DeleteEmployee():
-#     if request.method == 'POST':
-#         emp_id = request.form['emp_id']
+@app.route("/DeleteEmp", methods=['GET','POST'])
+def DeleteEmployee():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
 
-#         # Check if the employee ID exists in the database
-#         cursor = db_conn.cursor()
-#         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-#         cursor.execute(select_sql, (emp_id,))
-#         employee = cursor.fetchone()
+        # Check if the employee ID exists in the database
+        cursor = db_conn.cursor()
+        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+        cursor.execute(select_sql, (emp_id,))
+        employee = cursor.fetchone()
 
-#         if employee:
-#             # Execute the DELETE statement to remove the employee record
-#             delete_sql = "DELETE FROM employee WHERE emp_id = %s"
-#             cursor.execute(delete_sql, (emp_id,))
-#             db_conn.commit()
-#             cursor.close()
+        if employee:
+            # Execute the DELETE statement to remove the employee record
+            delete_sql = "DELETE FROM employee WHERE emp_id = %s"
+            cursor.execute(delete_sql, (emp_id,))
+            db_conn.commit()
+            cursor.close()
 
-#             success_msg = "Employee ID {} deleted successfully.".format(emp_id)
-#             return render_template('Success.html', success_msg=success_msg)
-#         else:
-#             error_msg = "Employee ID {} not found.".format(emp_id)
-#             return render_template('Error.html', error_msg=error_msg)
-#     else:
-#         return render_template('DeleteEmp.html')
+            success_msg = "Employee ID {} deleted successfully.".format(emp_id)
+            return render_template('DeleteEmp.html', success_msg=success_msg)
+        else:
+            error_msg = "Employee ID {} not found.".format(emp_id)
+            return render_template('Error.html', error_msg=error_msg)
+    else:
+        return render_template('DeleteEmp.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
