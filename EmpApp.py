@@ -29,6 +29,9 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
+@app.route("/Error")
+def Error():
+    return render_template('Error.html')
 
 @app.route("/AddEmp", methods=['GET','POST'])
 def AddEmp():

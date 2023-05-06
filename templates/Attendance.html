@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Attendance Report for {{ employee_name }}</title>
+  <title>Attendance Form</title>
 </head>
 <body>
-  <h1>Attendance Report for {{ employee_name }}</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for date, status in attendance_data %}
-      <tr>
-        <td>{{ date }}</td>
-        <td>{{ status }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <h1>Attendance Form</h1>
+  <form method="POST" action="/submit_attendance">
+    <label for="employee_id">Employee ID:</label>
+    <input type="text" id="employee_id" name="employee_id" required><br><br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required><br><br>
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="">Select an option</option>
+      <option value="Present">Present</option>
+      <option value="Absent">Absent</option>
+      <option value="Late">Late</option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+  </form>
 </body>
 </html>
+
+
+
+
+
+
+
