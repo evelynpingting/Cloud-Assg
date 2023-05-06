@@ -223,11 +223,18 @@ def CheckEmployee():
     
 @app.route("/UpdateEmp", methods=['GET', 'POST'])
 def UpdateEmployee():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        emp_id = request.form['emp_id']
+        cursor = db_conn.cursor()
+        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+        cursor.execute(select_sql, (emp_id,))
+        employee = cursor.fetchone()
+        return render_template('UpdateEmp.html',employee=employee)
+    
+    else:
         # emp_id = request.form['emp_id']
 
         # Retrieve the employee from the database
-       
 
         if employee:
             # Convert the tuple to a dictionary
@@ -296,13 +303,7 @@ def UpdateEmployee():
             # Handle the case when employee is not found
             error_msg = "Employee ID {} not found.".format(emp_id)
             return render_template('Error.html', error_msg=error_msg)
-    else:
-        emp_id = request.form['emp_id']
-        cursor = db_conn.cursor()
-        select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        cursor.execute(select_sql, (emp_id,))
-        employee = cursor.fetchone()
-        return render_template('UpdateEmp.html',employee=employee)
+    
 
 @app.route("/UpdateSuccess", methods=['GET','POST'])
 def UpdateSuccess():
