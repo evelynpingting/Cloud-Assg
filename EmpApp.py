@@ -231,7 +231,7 @@ def ReadEmployee():
             error_msg = "Employee ID {} not found.".format(emp_id)
             return render_template('Error.html', error_msg=error_msg)
     else:
-        return render_template('ReadEmp.html')
+        return render_template('EmployeeInfo.html')
     # else:
         # return render_template('ReadEmp.html')
     
