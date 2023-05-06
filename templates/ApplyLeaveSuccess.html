@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<center>
+		<font color="DodgerBlue" size="5" style="font-family: avenir">
+
+<body bgcolor="lightgrey">
+	<h1>APPLY LEAVE SUCCESSFUL</h1><br>
+	<h2>Following Employee has been apply leave successfully and stored into database</h2><br>
+	<br>
+		<h3>Employee id: {{ id }}</h3>
+        <h3>Name: {{ emp_name }}</h3>
+        <h3>Type of Leave: {{ type_leave }}</h3>
+        <h3>Start Date: {{ start_date }}</h3>
+        <h3>End Date: {{ end_date }}</h3>
+        <br>
+	<title>Add Emp Output</title>
+	<form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
+
+		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+			BACK</button><br><br>
+
+	</form>
+	<a href="/"><input type="button" value="Back to home"></a>
+</body>
+</font>
+</center>
+</head>
+
+<body>
+
+</body>
+
+</html>
