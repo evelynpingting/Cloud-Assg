@@ -16,7 +16,6 @@ db_conn = connections.Connection(
     user=customuser,
     password=custompass,
     db=customdb
-
 )
 output = {}
 table = 'employee'
@@ -392,11 +391,32 @@ def AddAttendance():
     else:
         return render_template('AddAttendance.html')
  
+# @app.route("/CheckAttendanceRecord", methods=['GET'])
+# def CheckAttendanceRecord():
+#     # get the date from the query parameter
+#     date = request.form['date']
+#     date = date.strftime("%Y-%m-%d")
+
+#     # retrieve the attendance record from the database
+#     cursor = db_conn.cursor()
+#     select_sql = "SELECT employeeAttendance.date, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
+#     cursor.execute(select_sql, (date,))
+#     attendance_info = cursor.fetchall()
+#     cursor.close()
+
+#     if attendance_info:
+#         # render the attendance record in the AttendanceInfo.html template
+#         return render_template('AttendanceInfo.html', attendance_info=attendance_info)
+#     else:
+#         # if no attendance record found in the database
+#         error_msg = "No employees found."
+#         return render_template('Error.html', error_msg=error_msg)
+    
 @app.route("/CheckAttendanceRecord", methods=['GET'])
 def CheckAttendanceRecord():
     # get the date from the query parameter
-    date = request.form['date']
-    date = date.strftime("%Y-%m-%d")
+    date = request.args.get('date')
+    date = datetime.strptime(date, "%Y-%m-%d").date()
 
     # retrieve the attendance record from the database
     cursor = db_conn.cursor()
