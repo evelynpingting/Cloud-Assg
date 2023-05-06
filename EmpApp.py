@@ -381,14 +381,14 @@ def AddAttendance():
             db_conn.commit()
             cursor.close()
             success_msg = "Attendance added successfully.".format(emp_id)
-            return render_template('ReadEmp.html', success_msg=success_msg)
+            return render_template('AddAttendance.html', success_msg=success_msg)
         
         else:
             error_msg = "Employee ID {} not found.".format(emp_id)
             return render_template('Error.html', error_msg=error_msg)
     
     else:
-        return render_template('ReadEmp.html')
+        return render_template('AddAttendance.html')
  
 
 if __name__ == '__main__':

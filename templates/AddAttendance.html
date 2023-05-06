@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Employee Attendance</title>
+</head>
+
+<body>
+	<center>
+		<font color="black" size="4" style="font-family: avenir">
+
+			<h1 style="color: DodgerBlue">Attendance</h1>
+
+			<body bgcolor="lightgrey">
+
+				<form action="/AddAttendance" autocomplete="on" method="POST" enctype="multipart/form-data">
+
+					<h4 style="color: DodgerBlue">Input the employee ID that you wish to add attendance for</h4>
+
+					Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number"
+						name="emp_id" autofocus size="40"><br><br>
+
+					<button type="submit"
+						style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">ADD ATTENDANCE</button>
+
+				</form>
+                {% if success_msg %}
+                <div style="color: green;">{{ success_msg }}</div>
+                {% endif %}
+				
+				<a href="/"><input type="button" value="Back to home"></a>
+			</body>
+
+		</font>
+	</center>
+</body>
+
+</html>
