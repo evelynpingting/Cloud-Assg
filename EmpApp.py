@@ -199,7 +199,7 @@ def ReadAllEmployees():
         error_msg = "No employees found."
         return render_template('Error.html', error_msg=error_msg)
     
-@app.route("/CheckIdUpdate", methods=['GET','POST'])
+@app.route("/UpdateEmp", methods=['GET','POST'])
 def CheckEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
@@ -212,17 +212,77 @@ def CheckEmployee():
         cursor.close()
 
         if employee:
-            # Render the update page with the employee ID
-            return render_template('UpdateEmp.html', emp_id=emp_id)
+            # Convert the tuple to a dictionary
+            employee_dict = {
+                'emp_id': employee[0],
+                'first_name': employee[1],
+                'last_name': employee[2],
+                'pri_skill': employee[3],
+                'location': employee[4],
+                'hire_date': employee[5],
+                'exp_year': employee[6],
+                'edu_lvl': employee[7],
+                'position': employee[8],
+                'salary': employee[9]
+            }
+
+            # Update the specific employee information
+            if 'first_name' in request.form:
+                employee_dict['first_name'] = request.form['first_name']
+
+            if 'last_name' in request.form:
+                employee_dict['last_name'] = request.form['last_name']
+
+            if 'pri_skill' in request.form:
+                employee_dict['pri_skill'] = request.form['pri_skill']
+
+            if 'location' in request.form:
+                employee_dict['location'] = request.form['location']
+
+            if 'hire_date' in request.form:
+                employee_dict['hire_date'] = request.form['hire_date']
+
+            if 'exp_year' in request.form:
+                employee_dict['exp_year'] = request.form['exp_year']
+
+            if 'edu_lvl' in request.form:
+                employee_dict['edu_lvl'] = request.form['edu_lvl']
+
+            if 'position' in request.form:
+                employee_dict['position'] = request.form['position']
+
+            if 'salary' in request.form:
+                employee_dict['salary'] = request.form['salary']
+
+            # Perform the update in the database
+            update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
+            cursor.execute(update_sql, (
+                employee_dict['first_name'],
+                employee_dict['last_name'],
+                employee_dict['pri_skill'],
+                employee_dict['location'],
+                employee_dict['hire_date'],
+                employee_dict['exp_year'],
+                employee_dict['edu_lvl'],
+                employee_dict['position'],
+                employee_dict['salary'],
+                emp_id
+            ))
+            db_conn.commit()
+
+            cursor.close()
+
+            # Redirect the user to a success page or display a success message
+            return render_template('UpdateSuccess.html')
         else:
             # Handle the case when employee is not found
             error_msg = "Employee ID {} not found.".format(emp_id)
             return render_template('Error.html', error_msg=error_msg)
     else:
-        return render_template('CheckIdUpdate.html')
+        return render_template('UpdateEmp.html')
     
     
-@app.route("/UpdateEmp", methods=['GET', 'POST'])
+@app.route("/UpdateEmpOld", methods=['GET', 'POST'])
 def UpdateEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
@@ -313,7 +373,32 @@ def UpdateSuccess():
         return render_template('UpdateSucess.html')
     else:
         return render_template('UpdateSuccess.html')
-    
+
+# @app.route("/DeleteEmp", methods=['POST'])
+# def DeleteEmployee():
+#     if request.method == 'POST':
+#         emp_id = request.form['emp_id']
+
+#         # Check if the employee ID exists in the database
+#         cursor = db_conn.cursor()
+#         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+#         cursor.execute(select_sql, (emp_id,))
+#         employee = cursor.fetchone()
+
+#         if employee:
+#             # Execute the DELETE statement to remove the employee record
+#             delete_sql = "DELETE FROM employee WHERE emp_id = %s"
+#             cursor.execute(delete_sql, (emp_id,))
+#             db_conn.commit()
+#             cursor.close()
+
+#             success_msg = "Employee ID {} deleted successfully.".format(emp_id)
+#             return render_template('Success.html', success_msg=success_msg)
+#         else:
+#             error_msg = "Employee ID {} not found.".format(emp_id)
+#             return render_template('Error.html', error_msg=error_msg)
+#     else:
+#         return render_template('DeleteEmp.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
