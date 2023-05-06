@@ -3,7 +3,7 @@ from pymysql import connections
 import os
 import boto3
 from config import *
-import datetime
+from datetime import datetime
 
 app = Flask(__name__)
 
