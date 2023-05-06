@@ -396,7 +396,7 @@ def AddAttendance():
 def CheckAttendanceRecord():
     # get the date from the query parameter
     date = request.form('date')
-    date = datetime.now().strftime("%Y-%m-%d")
+    date = date.strftime("%Y-%m-%d")
 
     # retrieve the attendance record from the database
     cursor = db_conn.cursor()
