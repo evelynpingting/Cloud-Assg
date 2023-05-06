@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from pymysql import connections
-#from wtforms import Form, SelectField, IntegerField, validators
 import os
 import boto3
 from config import *
@@ -30,10 +29,74 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-class SalaryForm(Form):
-    position = SelectField('Position', choices=[('entry', 'Entry Level'), ('mid', 'Mid Level'), ('senior', 'Senior Level')], validators=[validators.InputRequired()])
-    education = SelectField('Education Level', choices=[('high', 'High School'), ('college', 'College'), ('grad', 'Graduate')], validators=[validators.InputRequired()])
-    experience = IntegerField('Years of Experience', validators=[validators.InputRequired(), validators.NumberRange(min=0, max=50)])
+# @app.route("/addemp", methods=['POST'])
+# def calculate_salary(exp_yr, edu_lvl, position):
+    # Set base salaries for each position
+    # base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
+    #                  'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
+    
+    # base_salary = base_salaries[position]
+    # if position == "graphic_designer":
+    #     base_salary = 30000
+    #     salary = base_salary + (0.05 * base_salary)
+    # elif position == "web_developer":
+    #     base_salary = 50000
+    #     salary = base_salary + (0.1 * base_salary)
+    # elif position == "marketing_analyst":
+    #     base_salary = 40000
+    #     salary = base_salary + (0.2 * base_salary)
+    # elif position == "content_creator":
+    #     base_salary = 35000
+    #     salary = base_salary + (0.3 * base_salary)
+    # elif position == "digital_marketing_manager":
+    #     base_salary = 70000
+    #     salary = base_salary + (0.4 * base_salary)
+    # elif position == "social_media_manager":
+    #     base_salary = 45000
+    #     salary = base_salary + (0.4 * base_salary)
+    # else:
+    #     raise ValueError("Invalid position")
+    
+    if position == "graphic designer":
+        base_salary = 30000
+        salary = base_salary + (0.05 * base_salary)
+    elif position == "web developer":
+        base_salary = 50000
+        salary = base_salary + (0.1 * base_salary)
+    elif position == "marketing analyst":
+        base_salary = 40000
+        salary = base_salary + (0.2 * base_salary)
+    elif position == "content creator":
+        base_salary = 35000
+        salary = base_salary + (0.3 * base_salary)
+    elif position == "digital marketing manager":
+        base_salary = 70000
+        salary = base_salary + (0.4 * base_salary)
+    elif position == "social media manager":
+        base_salary = 45000
+        salary = base_salary + (0.4 * base_salary)
+    else:
+        raise ValueError("Invalid position")
+    
+    if edu_lvl == "high school":
+        salary = base_salary + (0.05 * base_salary)
+    elif edu_lvl == "associate degree":
+        salary = base_salary + (0.1 * base_salary)
+    elif edu_lvl == "bachelor degree":
+        salary = base_salary + (0.2 * base_salary)
+    elif edu_lvl == "master":
+        salary = base_salary + (0.3 * base_salary)
+    elif edu_lvl == "doctorate":
+        salary = base_salary + (0.4 * base_salary)
+    else:
+        raise ValueError("Invalid education level")
+    
+    # Add experience year bonus if experience year is more than 5
+    if int(exp_yr)> 5:
+        salary += (0.05 * salary)
+
+    return salary
+
 
 @app.route("/AddEmp", methods=['GET','POST'])
 def AddEmp():
@@ -54,8 +117,64 @@ def AddEmp():
 
         #calculate salary
         # salary = calculate_salary(exp_yr, edu_lvl, position)
+         # Set base salaries for each position
 
-        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        base_salaries = {'graphic designer': 30000, 'web developer': 50000, 'marketing analyst': 40000,
+                        'content creator': 35000, 'digital marketing manager': 70000, 'social media manager': 45000}
+        
+        # Set education level multipliers
+        edu_multipliers = {'high school': 0.9, 'associate degree': 1.0, 'bachelor degree': 1.1,
+                        'master': 1.2, 'phd': 1.3}
+
+        # base_salary = base_salaries[position]
+        base_salary = base_salaries.get(position)
+        if base_salary is None:
+            raise ValueError("Invalid position")
+        
+        education_factor = edu_multipliers.get(edu_lvl, 1.0)
+        
+        # # Get bonus percentage based on position
+        # bonus_dict = {'graphic designer': 0.05, 'web developer': 0.1, 'marketing analyst': 0.2,
+        #                 'content creator': 0.3, 'digital marketing manager': 0.4, 'social media manager': 0.4}
+        # bonus = bonus_dict.get(position, 0)
+        
+
+        salary = base_salary * education_factor
+        # if position == "graphic designer":
+        #     salary = base_salary + (0.05 * base_salary)
+        # elif position == "web developer":
+        #     salary = base_salary + (0.1 * base_salary)
+        # elif position == "marketing analyst":
+        #     salary = base_salary + (0.2 * base_salary)
+        # elif position == "content creator":
+        #     salary = base_salary + (0.3 * base_salary)
+        # elif position == "digital marketing manager":
+        #     salary = base_salary + (0.4 * base_salary)
+        # elif position == "social media manager":
+        #     salary = base_salary + (0.4 * base_salary)
+        # else:
+        #     raise ValueError("Invalid position")
+        
+        # if edu_lvl == "high school":
+        #     salary = base_salary + (0.05 * base_salary)
+        # elif edu_lvl == "associate degree":
+        #     salary = base_salary + (0.1 * base_salary)
+        # elif edu_lvl == "bachelor degree":
+        #     salary = base_salary + (0.2 * base_salary)
+        # elif edu_lvl == "master":
+        #     salary = base_salary + (0.3 * base_salary)
+        # elif edu_lvl == "doctorate":
+        #     salary = base_salary + (0.4 * base_salary)
+        # else:
+        #     raise ValueError("Invalid education level")
+        
+        # Add experience year bonus if experience year is more than 5
+        if int(exp_yr)> 5:
+            salary += (0.05 * salary)
+
+    # return salary
+
+        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
         cursor = db_conn.cursor()
 
         if emp_image_file.filename == "":
@@ -63,7 +182,7 @@ def AddEmp():
 
         try:
 
-            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position))
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
             db_conn.commit()
             emp_name = "" + first_name + " " + last_name
             # Uplaod image file in S3 #
@@ -190,7 +309,7 @@ def ReadAllEmployees():
         error_msg = "No employees found."
         return render_template('Error.html', error_msg=error_msg)
     
-@app.route("/UpdateEmp", methods=['POST'])
+@app.route("/UpdateEmp", methods=['GET','POST'])
 def UpdateEmployee():
     emp_id = request.form['emp_id']
 
@@ -237,8 +356,6 @@ def UpdateEmployee():
         if 'salary' in request.form:
             salary = request.form['salary']
             employee['salary'] = salary
-
-     
 
         # Perform the update in the database
         update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
