@@ -221,10 +221,11 @@ def CheckEmployee():
     else:
         return render_template('CheckIdUpdate.html')
     
+    
 @app.route("/UpdateEmp", methods=['GET', 'POST'])
-def UpdateEmployee(emp_id):
+def UpdateEmployee():
     if request.method == 'POST':
-        # emp_id = request.form['emp_id']
+        emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(select_sql, (emp_id,))
@@ -303,7 +304,7 @@ def UpdateEmployee(emp_id):
             error_msg = "Employee ID {} not found.".format(emp_id)
             return render_template('Error.html', error_msg=error_msg)
     else:
-        return render_template('UpdateEmp.html',employee=employee)
+        return render_template('UpdateEmp.html')
     
 
 @app.route("/UpdateSuccess", methods=['GET','POST'])
