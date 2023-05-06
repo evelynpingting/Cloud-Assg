@@ -109,25 +109,66 @@ def AddEmp():
     else:
         return render_template('AddEmp.html')
 
+# @app.route("/ApplyLeaveEmp", methods=['GET','POST'])
+# def ApplyLeaveEmp():
+#     if request.method == 'POST':
+#         try:
+#             emp_id = request.form['emp_id']
+#             type_leave = request.form['type_leave']
+#             start_date = request.form['start_date']
+#             end_date = request.form['end_date']
+
+#             insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
+#             cursor = db_conn.cursor()
+
+#             # execute the insert query with the values obtained from the HTML form
+#             cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
+
+#             # commit the changes to the database
+#             db_conn.commit()
+
+#             return render_template('ApplyLeaveEmp.html')
+
+#         except Exception as e:
+#             # handle the error and rollback changes
+#             db_conn.rollback()
+#             return "Error: " + str(e)
+#         finally:
+#             # close the database connection
+#             cursor.close()
+#     else:
+#         return render_template('ApplyLeaveEmp.html')
+
 @app.route("/ApplyLeaveEmp", methods=['GET','POST'])
 def ApplyLeaveEmp():
     if request.method == 'POST':
         try:
             emp_id = request.form['emp_id']
-            type_leave = request.form['type_leave']
-            start_date = request.form['start_date']
-            end_date = request.form['end_date']
-
-            insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
+            
+            # Check if the employee ID exists in the database
             cursor = db_conn.cursor()
+            select_sql = "SELECT * FROM employee WHERE emp_id = %s"
+            cursor.execute(select_sql, (emp_id,))
+            employee = cursor.fetchone()
+            
+            if employee:
+                type_leave = request.form['type_leave']
+                start_date = request.form['start_date']
+                end_date = request.form['end_date']
 
-            # execute the insert query with the values obtained from the HTML form
-            cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
+                insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
 
-            # commit the changes to the database
-            db_conn.commit()
+                # execute the insert query with the values obtained from the HTML form
+                cursor.execute(insert_sql, (emp_id, type_leave, start_date, end_date))
 
-            return render_template('ApplyLeaveEmp.html')
+                # commit the changes to the database
+                db_conn.commit()
+
+                return render_template('ApplyLeaveEmp.html')
+            else:
+                # Handle the case when employee is not found
+                error_msg = "Employee ID {} not found.".format(emp_id)
+                return render_template('Error.html', error_msg=error_msg)
 
         except Exception as e:
             # handle the error and rollback changes
