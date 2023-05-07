@@ -25,9 +25,18 @@ def home():
     return render_template('MainMenu.html')
 
 
-@app.route("/AboutUs", methods=['POST'])
+@app.route("/AboutUsYk")
 def about():
-    return render_template('www.intellipaat.com')
+    return render_template('AboutUsYk.html')
+
+@app.route("/AboutUsPt")
+def about():
+    return render_template('AboutUsPt.html')
+
+@app.route("/AboutUsSy")
+def about():
+    return render_template('AboutUsSy.html')
+
 
 @app.route("/Error")
 def Error():
@@ -200,33 +209,7 @@ def ReadEmployee():
     else:
         return render_template('ReadEmp.html')
     
-    
-    # if request.method == "POST":
-    #     date = datetime.now().strftime("%Y-%m-%d")
-    #     emp_id = request.form['emp_id']
-    #     time = datetime.now("%H:%M:%S")
-    #     Check if the employee ID exists in the database
-    #     cursor = db_conn.cursor()
-    #     select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-    #     cursor.execute(select_sql, (emp_id,))
-    #     employee = cursor.fetchone()
-
-    #     if employee:
-    #         insert_sql = "INSERT INTO employeeAttendance (date, emp_id, time) VALUES (%s, %s, %s)"
-    #         cursor.execute(insert_sql, (date, emp_id, time))
-    #         db_conn.commit()
-    #         cursor.close()
-    #         success_msg = "Attendance added successfully.".format(emp_id)
-    #         return render_template('ReadEmp.html', success_msg=success_msg)
-
-    #     else:
-    #         # if the employee ID is not found in the database
-    #         error_msg = "Employee ID {} not found.".format(emp_id)
-    #         return render_template('Error.html', error_msg=error_msg)
-    # else:
-    #     return render_template('ReadEmp.html')
-    
-    
+  
 
 @app.route("/AllEmpInfo", methods=['GET','POST'])
 def ReadAllEmployees():
@@ -391,26 +374,7 @@ def AddAttendance():
     else:
         return render_template('AddAttendance.html')
  
-# @app.route("/CheckAttendanceRecord", methods=['GET'])
-# def CheckAttendanceRecord():
-#     # get the date from the query parameter
-#     date = request.form['date']
-#     date = date.strftime("%Y-%m-%d")
 
-#     # retrieve the attendance record from the database
-#     cursor = db_conn.cursor()
-#     select_sql = "SELECT employeeAttendance.date, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
-#     cursor.execute(select_sql, (date,))
-#     attendance_info = cursor.fetchall()
-#     cursor.close()
-
-#     if attendance_info:
-#         # render the attendance record in the AttendanceInfo.html template
-#         return render_template('AttendanceInfo.html', attendance_info=attendance_info)
-#     else:
-#         # if no attendance record found in the database
-#         error_msg = "No employees found."
-#         return render_template('Error.html', error_msg=error_msg)
     
 @app.route("/CheckAttendanceRecord", methods=['GET','POST'])
 def CheckAttendanceRecord():
