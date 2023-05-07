@@ -3,27 +3,88 @@
 
 <head>
 	<title>Delete Employee Information</title>
+	<style>
+		body {
+			background-color: #e1eedd;
+			font-family: "avenir", sans-serif;
+		}
+		.container {
+			background-color: #fefbe9;
+			box-shadow: 0px 0px 10px 0px #183a1d;
+			padding: 20px;
+			margin: 50px auto;
+			max-width: 500px;
+		}
+		h1 {
+			color: #f0a04b;
+			text-align: center;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		input[type="number"] {
+			height: 25px;
+			font-size: 14pt;
+			color: grey;
+			margin-bottom: 20px;
+			text-align: center;
+			border: none;
+			border-radius: 5px;
+			padding: 5px;
+			box-shadow: 0px 0px 5px 0px #183a1d;
+		}
+		input[type="number"]::placeholder {
+			color: grey;
+		}
+		button[type="delete"] {
+			background-color: #f6c453;
+			color: white;
+			height: 45px;
+			width: 200px;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			font-style: oblique;
+			cursor: pointer;
+			box-shadow: 0px 0px 5px 0px #183a1d;
+			margin-bottom: 20px;
+		}
+		button[type="delete"]:hover {
+			background-color: #f0a04b;
+		}
+		a {
+			text-decoration: none;
+		}
+		input[type="button"] {
+			background-color: #f6c453;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			box-shadow: 0px 0px 5px 0px #183a1d;
+			padding: 10px 20px;
+		}
+		input[type="button"]:hover {
+			background-color: #f0a04b;
+		}
+	</style>
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Employee Database</h1>
-
-		<body bgcolor="lightgrey">
-			<form action="/DeleteEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
-				Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id"
-					autofocus size="40"><br><br>
-				<button type="delete"
-					style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">DELETE
-				</button>
-			</form>
-			{% if success_msg %}
-    		<div style="color: green;">{{ success_msg }}</div>
-			{% endif %}
-
-			<a href="/"><input type="button" value="Back to home"></a>
-		</body>
-	</font>
-</center>
-
+<body>
+	<div class="container">
+		<h1>Employee Database</h1>
+		<form action="/DeleteEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+			<label for="emp_id">Emp ID:</label>
+			<input type="number" name="emp_id" autofocus size="40" placeholder="Enter employee ID...">
+			<button type="delete">DELETE</button>
+		</form>
+		{% if success_msg %}
+    	<div style="color: green;">{{ success_msg }}</div>
+		{% endif %}
+		<a href="/"><input type="button" value="Back to home"></a>
+	</div>
+</body>
 </html>
