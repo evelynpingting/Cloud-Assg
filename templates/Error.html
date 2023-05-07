@@ -2,28 +2,74 @@
 <html>
 
 <head>
-	<title>Error occurs</title>
+    <title>Error Occurs</title>
+    <style>
+        body {
+            /* background-color: #e1eedd;
+            font-family: "Poppins", sans-serif;
+            color: #0c0c0c; */
+            font-family: "Poppins", sans-serif;
+            color: #0c0c0c;
+            background-color: #fefbe9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #f0a04b;
+        }
+
+        .container {
+            /* display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fefbe9; */
+            background-color: #fefbe9;
+            border: 1px solid #f6c453;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .error-message {
+            color: #183a1d;
+            margin-bottom: 20px;
+        }
+
+        .container input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container input[type="button"]:hover {
+            background-color: #f0a04b;
+        }
+    </style>
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">ERROR</h1>
+<body>
+    <div class="container">
+        <h1>Error</h1>
+        <div class="error-message">{{ error_msg }}</div>
 
-		<body bgcolor="lightgrey">
-			<!-- <form action="/DeleteEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
-				Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id"
-					autofocus size="40"><br><br>
-				<button type="delete"
-					style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">DELETE
-				</button>
-			</form> -->
-		
-    		<div style="color: red;">{{ error_msg }}</div>
-			
-
-			<a href="/"><input type="button" value="Back to home"></a>
-		</body>
-	</font>
-</center>
+        <a href="/"><input type="button" value="Back to Home"></a>
+    </div>
+</body>
 
 </html>

@@ -3,45 +3,105 @@
 
 <head>
 	<title>Apply Leave Application</title>
+	<style>
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			background-color: #fefbe9;
+			padding: 20px;
+			margin: 20px;
+			border-radius: 5px;
+		}
+
+		h1 {
+			color: #183a1d;
+			font-size: 28px;
+			margin-bottom: 30px;
+			text-align: center;
+			text-shadow: 2px 2px #f0a04b;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		label {
+			color: #183a1d;
+			font-size: 18px;
+			margin-top: 20px;
+			text-shadow: 1px 1px #f0a04b;
+		}
+
+		input[type="number"],
+		input[type="date"],
+		select {
+			height: 25px;
+			font-size: 14pt;
+			color: #183a1d;
+			background-color: #e1eedd;
+			border: none;
+			padding: 5px;
+			border-radius: 5px;
+			margin-top: 10px;
+		}
+
+		button[type="submit"] {
+			background-color: #f6c453;
+			color: #183a1d;
+			height: 45px;
+			width: 200px;
+			font-size: 18px;
+			font-weight: bold;
+			border: none;
+			border-radius: 5px;
+			margin-top: 20px;
+			cursor: pointer;
+			text-shadow: 1px 1px #f0a04b;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #f0a04b;
+		}
+
+		a {
+			margin-top: 20px;
+			text-align: center;
+			color: #183a1d;
+			text-decoration: none;
+			text-shadow: 1px 1px #f0a04b;
+		}
+
+		a:hover {
+			color: #f0a04b;
+		}
+	</style>
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Apply Leave Application</h1>
+<body>
+	<div class="card">
+		<h1>Apply Leave Application</h1>
+		<form action="/ApplyLeaveEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+			<label for="emp_id">Employee ID:</label>
+			<input type="number" name="emp_id" id="emp_id" autofocus required>
 
+			<label for="type_leave">Type of Leave:</label>
+			<select name="type_leave" id="type_leave" required>
+				<option value="annual">Annual</option>
+				<option value="sick">Sick</option>
+				<option value="maternity">Maternity</option>
+				<option value="paternity">Paternity</option>
+			</select>
 
-		<body bgcolor="lightgrey">
+			<label for="start_date">Start Date:</label>
+			<input type="date" name="start_date" id="start_date" required>
 
-			<form action="/ApplyLeaveEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+			<label for="end_date">End Date:</label>
+			<input type="date" name="end_date" id="end_date" required>
 
+			<button type="submit">SUBMIT APPLICATION</button>
+		</form>
 
-				Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id"
-					autofocus size="40"><br><br>
-
-				<!-- Type of Leave:<br> <input style="height:25px;font-size:14pt; color:grey;" type="text" name="type_leave" autofocus size="40"><br><br> -->
-				<label for="type_leave">Type of Leave:<br></label>
-				<select name="type_leave" id="type_leave">
-					<option value="annual">Annual</option>
-					<option value="sick">Sick</option>
-					<option value="maternity">Maternity</option>
-					<option value="paternity">Paternity</option>
-				</select><br><br>
-
-				Start Date:<br> <input style="height:25px;font-size:14pt; color:grey;" type="date" name="start_date"
-					autofocus size="40"><br><br>
-
-				End Date:<br> <input style="height:25px;font-size:14pt; color:grey;" type="date" name="end_date"
-					autofocus size="40"><br><br>
-
-				<button type="submit"
-					style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">SUBMIT
-					APPLICATION</button>
-
-			</form>
-			<a href="/"><input type="button" value="Back to home"></a>
-		</body>
-
-	</font>
-</center>
-
+		<a href="/">Back to home</a>
+	</div>
 </html>

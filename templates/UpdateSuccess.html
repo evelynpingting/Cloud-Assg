@@ -2,11 +2,65 @@
 <html>
 <head>
     <title>Update Success</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            color: #0c0c0c;
+            background-color: #fefbe9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fefbe9;
+            border: 1px solid #f6c453;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #f6c453;
+            margin-top: 0;
+        }
+
+        p {
+            color: #183a1d;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #183a1d;
+            text-decoration: none;
+        }
+
+        .container input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container input[type="button"]:hover {
+            background-color: #f0a04b;
+        }
+    </style>
 </head>
 <body>
-    <h1>Update Successful</h1>
-    <p>The employee information has been successfully updated.</p>
-    
-    <a href="/">Back to home</a>
+    <div class="container">
+        <h1>Update Successful</h1>
+        <p>The employee information has been successfully updated.</p>
+        
+        <a href="/"><input type="button" value="Back to Home"></a>
+    </div>
 </body>
 </html>
