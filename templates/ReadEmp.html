@@ -2,34 +2,82 @@
 <html>
 
 <head>
-	<title>Retrieve Employee Information</title>
+    <title>Retrieve Employee Information</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            color: #0c0c0c;
+            background-color: #fefbe9;
+        }
+
+        h1 {
+            color: #f0a04b;
+        }
+
+        h4 {
+            color: #183a1d;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="number"] {
+            height: 25px;
+            font-size: 14pt;
+            color: grey;
+            background-color: #e1eedd;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background: #183a1d;
+            height: 45px;
+            width: 200px;
+            color: white;
+            font-size: 16px;
+            font-style: oblique;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #f0a04b;
+        }
+
+        input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #f0a04b;
+        }
+    </style>
 </head>
 
 <body>
-	<center>
-		<font color="black" size="4" style="font-family: avenir">
-
-			<h1 style="color: DodgerBlue">Employee Information</h1>
-
-			<body bgcolor="lightgrey">
-
-				<form action="/ReadEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
-
-					<h4 style="color: DodgerBlue">Input the employee ID that you wish to retrieve full information</h4>
-
-					Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number"
-						name="emp_id" autofocus size="40"><br><br>
-
-					<button type="submit"
-						style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">RETRIEVE
-						EMPLOYEE</button>
-				</form>
-				
-				<a href="/"><input type="button" value="Back to home"></a>
-			</body>
-
-		</font>
-	</center>
+    <center>
+        <h1>Employee Information</h1>
+        <form action="/ReadEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+            <h4>Input the employee ID that you wish to retrieve full information</h4>
+            Employee ID:<br>
+            <input type="number" name="emp_id" autofocus size="40"><br><br>
+            <button type="submit">Retrieve Employee</button><br><br>
+        </form>
+        <a href="/"><input type="button" value="Back to home"></a>
+    </center>
 </body>
 
 </html>

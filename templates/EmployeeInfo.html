@@ -2,30 +2,64 @@
 <html>
 
 <head>
-	<title>Employee Information</title>
+    <title>Employee Information</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            color: #0c0c0c;
+            background-color: #e1eedd;
+        }
+
+        h1 {
+            color: #f6c453;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #0c0c0c;
+            border-radius: 10px;
+            background-color: #fefbe9;
+        }
+
+        .container p {
+            margin: 10px 0;
+        }
+
+        .container input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container input[type="button"]:hover {
+            background-color: #f0a04b;
+        }
+    </style>
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">{{ first_name }} {{ last_name }}'s Information</h1>
+<body>
+    <div class="container">
+        <h1>{{ first_name }} {{ last_name }}'s Information</h1>
+        <p><strong>Name:</strong> {{ first_name }} {{ last_name }}</p>
+        <p><strong>Primary Skill:</strong> {{ pri_skill }}</p>
+        <p><strong>Address:</strong> {{ location }}</p>
+        <p><strong>Hire date:</strong> {{ hire_date }}</p>
+        <p><strong>Year of working Experience:</strong> {{ exp_year }}</p>
+        <p><strong>Education Level:</strong> {{ edu_lvl }}</p>
+        <p><strong>Position:</strong> {{ position }}</p>
+        <p><strong>Salary (RM):</strong> {{ salary }}</p>
 
-		<body bgcolor="lightgrey">
-
-			<div>
-				<p><strong>Name: </strong>{{ first_name }} {{ last_name }}</p>
-				<p><strong>Primary Skill: </strong>{{ pri_skill }}</p>
-				<p><strong>Address: </strong>{{ location }}</p>
-				<p><strong>Hire date: </strong>{{ hire_date }}</p>
-				<p><strong>Year of working Experience: </strong>{{ exp_year }}</p>
-				<p><strong>Education Level: </strong>{{ edu_lvl }}</p>
-				<p><strong>Position: </strong>{{ position }}</p>
-				<p><strong>Salary (RM): </strong>{{ salary }}</p>
-			</div>
-
-			<a href="/"><input type="button" value="Back to home"></a>
-		</body>
-
-	</font>
-</center>
+        <a href="/"><input type="button" value="Back to home"></a>
+    </div>
+</body>
 
 </html>
