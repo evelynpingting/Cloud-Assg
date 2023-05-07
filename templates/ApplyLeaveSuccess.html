@@ -2,33 +2,92 @@
 <html>
 
 <head>
-	<center>
-		<font color="DodgerBlue" size="5" style="font-family: avenir">
-
-<body bgcolor="lightgrey">
-	<h1>APPLY LEAVE SUCCESSFUL</h1><br>
-	<h2>Following Employee has been apply leave successfully and stored into database</h2><br>
-	<br>
-		<h3>Employee id: {{ emp_id }}</h3>
-        <h3>Type of Leave: {{ type_leave }}</h3>
-        <h3>Start Date: {{ start_date }}</h3>
-        <h3>End Date: {{ end_date }}</h3>
-        <br>
-	<title>Add Emp Output</title>
-	<form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
-
-		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-			BACK</button><br><br>
-
-	</form>
-	<a href="/"><input type="button" value="Back to home"></a>
-</body>
-</font>
-</center>
+	<title>Apply Leave Successful</title>
+	<style>
+		body {
+			background-color: #e1eedd;
+			font-family: avenir;
+		}
+		
+		.card {
+			background-color: #fefbe9;
+			border-radius: 8px;
+			box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+			margin: 50px auto;
+			padding: 30px;
+			width: 80%;
+			max-width: 600px;
+		}
+		
+		h1 {
+			color: #183a1d;
+			font-size: 2.5rem;
+			margin-top: 0;
+		}
+		
+		h2 {
+			color: #f0a04b;
+			font-size: 1.8rem;
+			margin-bottom: 40px;
+			margin-top: 0;
+		}
+		
+		h3 {
+			color: #0c0c0c;
+			font-size: 1.3rem;
+			margin-bottom: 20px;
+			margin-top: 0;
+		}
+		
+		button {
+			background-color: #f6c453;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			cursor: pointer;
+			font: oblique;
+			height: 45px;
+			margin-top: 20px;
+			padding: 0 20px;
+			transition: background-color 0.3s ease;
+			width: 200px;
+		}
+		
+		button:hover {
+			background-color: #f0a04b;
+		}
+		
+		input[type="button"] {
+			background-color: #183a1d;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			cursor: pointer;
+			font-size: 1rem;
+			margin-top: 20px;
+			padding: 10px 20px;
+			transition: background-color 0.3s ease;
+		}
+		
+		input[type="button"]:hover {
+			background-color: #041858;
+		}
+	</style>
 </head>
 
 <body>
-
+	<div class="card">
+		<h1>Apply Leave Successful!</h1>
+		<h2>Following Employee has been apply leave successfully and stored into database</h2>
+		<h3>Employee id: {{ emp_id }}</h3>
+		<h3>Type of Leave: {{ type_leave }}</h3>
+		<h3>Start Date: {{ start_date }}</h3>
+		<h3>End Date: {{ end_date }}</h3>
+		<form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
+			<button type="submit">GO BACK</button>
+		</form>
+		<a href="/"><input type="button" value="Back to home"></a>
+	</div>
 </body>
 
 </html>
