@@ -26,15 +26,15 @@ def home():
 
 
 @app.route("/AboutUsYk")
-def about():
+def aboutYk():
     return render_template('AboutUsYk.html')
 
 @app.route("/AboutUsPt")
-def about():
+def aboutPt():
     return render_template('AboutUsPt.html')
 
 @app.route("/AboutUsSy")
-def about():
+def aboutSy():
     return render_template('AboutUsSy.html')
 
 
