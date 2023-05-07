@@ -3,72 +3,166 @@
 
 <head>
 	<title>Add Employee Information</title>
+	<style>
+		body {
+			background-color: white;
+			color: #183a1d;
+			font-family: avenir;
+		}
+
+		h1 {
+			color: #183a1d;
+			margin-top: 50px;
+			margin-bottom: 30px;
+			font-size: 36px;
+			text-shadow: 2px 2px #f6c453;
+		}
+
+
+		form {
+			text-align: center;
+			margin-bottom: 50px;
+		}
+
+		input[type="number"],
+		input[type="text"],
+		input[type="date"] {
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 20px;
+			height: 25px;
+			font-size: 14pt;
+			color: #183a1d;
+			padding: 5px;
+			border: none;
+			border-radius: 5px;
+			background-color: #e1eedd;
+		}
+
+		select#position,
+		select#edu_lvl {
+			height: 40px;
+			font-size: 12pt;
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 50px;
+			color: #183a1d;
+			padding: 5px;
+			border: none;
+			border-radius: 5px;
+			background-color: #e1eedd;
+		}
+
+		input[type="file"] {
+			margin-top: 20px;
+		}
+
+		button[type="submit"] {
+			background-color: #f6c453;
+			height: 45px;
+			width: 200px;
+			color: #183a1d;
+			font-size: 15px;
+			font-weight: bold;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+			font: oblique;
+			display: inline-block;
+			margin-top: 70px;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #f0a04b;
+		}
+
+		a {
+			color: #183a1d;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		.card {
+			position: relative;
+			background-color: #fefbe9;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+			padding: 20px;
+			border-radius: 5px;
+			margin: 50px auto;
+			width: 1000px;
+		}
+
+		.back-btn {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			text-shadow: 1px 1px #f6c453;
+		}
+	</style>
+
 </head>
 <center>
 	<font color="black" size="4" style="font-family: avenir">
+		<div class="card">
 
-		<h1 style="color: DodgerBlue">Employee Database</h1>
+			<h1>Employee Database</h1>
 
-		<body bgcolor="lightgrey">
+			<body bgcolor="lightgrey">
 
-			<form action="/AddEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
+				<form action="/AddEmp" autocomplete="on" method="POST" enctype="multipart/form-data">
 
-				<button type="submit" formaction="/getemp"
-					style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GET EMPLOYEE
-					INFORMATION</button><br><br>
 
-				Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id"
-					autofocus size="40"><br><br>
 
-				First Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text"
-					name="first_name"><br><br>
+					Employee ID:<br> <input type="number" name="emp_id" autofocus size="40"><br><br>
 
-				Last Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text"
-					name="last_name"><br><br>
+					First Name:<br> <input type="text" name="first_name"><br><br>
 
-				Primary Skills:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text"
-					name="pri_skill"><br><br>
+					Last Name:<br> <input type="text" name="last_name"><br><br>
 
-				Location:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="location"><br><br>
+					Primary Skills:<br> <input type="text" name="pri_skill"><br><br>
 
-				Hire Date: <br> <input style="height:25px;font-size:14pt;color:grey;" type="date"
-					name="hire_date"><br><br>
+					Location:<br> <input type="text" name="location"><br><br>
 
-				Years experience:<br> <input style="height:25px;font-size:14pt;color:grey;" type="number"
-					name="exp_yr"><br><br>
+					Hire Date: <br> <input type="date" name="hire_date"><br><br>
 
-				<!-- high school,associate's degree,bachelor's degree, master, doctorate  -->
-				<label for="edu_lvl">Choose education level:</label>
-				<select id="edu_lvl" name="edu_lvl">
-					<option value="" disabled selected>Select an option</option>
-					<option value="high school">High school</option>
-					<option value="associate degree">Associate's degree</option>
-					<option value="bachelor degree">Bachelor's degree</option>
-					<option value="master">Master</option>
-					<option value="phd">Phd</option>
-				</select>
-				<!-- graphic designer, web developer, marketing analyst, content creator, digital marketing manager, social media manager -->
-				<label for="position">Choose position:</label>
-				<select id="position" name="position">
-					<option value="" disabled selected>Select an option</option>
-					<option value="graphic designer">Graphic designer</option>
-					<option value="web developer">Web developer</option>
-					<option value="marketing analyst">Marketing analyst</option>
-					<option value="content creator">Content creator</option>
-					<option value="digital marketing manager">Digital marketing manager</option>
-					<option value="social media manager">Social media manager</option>
-				</select>
+					Years experience:<br> <input type="number" name="exp_yr"><br><br>
 
-					Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;">
+
+					<label for="edu_lvl">Choose education level:</label>
+					<select id="edu_lvl" name="edu_lvl">
+						<option value="" disabled selected>Select an option</option>
+						<option value="high school">High school</option>
+						<option value="associate degree">Associate's degree</option>
+						<option value="bachelor degree">Bachelor's degree</option>
+						<option value="master">Master</option>
+						<option value="phd">Phd</option>
+					</select>
+
+					<label for="position">Choose position:</label>
+					<select id="position" name="position">
+						<option value="" disabled selected>Select an option</option>
+						<option value="graphic designer">Graphic designer</option>
+						<option value="web developer">Web developer</option>
+						<option value="marketing analyst">Marketing analyst</option>
+						<option value="content creator">Content creator</option>
+						<option value="digital marketing manager">Digital marketing manager</option>
+						<option value="social media manager">Social media manager</option>
+					</select>
+
+					Image: <input type=file name="emp_image_file">
 					<br><br>
 
-					<button type="submit"
-						style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE
+					<button type="submit">INSERT
 						DATABASE</button>
-			</form>
-			<a href="/"><input type="button" value="Back to home"></a>
-			<a href="/AboutUs">About Us</a>
-		</body>
+
+				</form>
+				<a href="/" class="back-btn">Back to home</a>
+			</body>
+		</div>
 
 	</font>
 </center>

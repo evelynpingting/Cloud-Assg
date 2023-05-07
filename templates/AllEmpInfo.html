@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Employee Information</title>
-</head>
-<body>
-    <h1>Employee Information</h1>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    {% if employees %}
+        .container {
+            position: relative;
+            background-color: #fefbe9;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 50px auto;
+            max-width: 1500px;
+            width: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 36px;
+            text-shadow: 2px 2px #f6c453;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f6c453;
+        }
+
+        .back-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            text-shadow: 1px 1px #f6c453;
+        }
+
+        a {
+            color: #183a1d;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Employee Information</h1>
+
+        {% if employees %}
         <table>
             <thead>
                 <tr>
@@ -24,26 +89,27 @@
             </thead>
             <tbody>
                 {% for employee in employees %}
-                    <tr>
-                        <td>{{ employee[0] }}</td>
-                        <td>{{ employee[1] }}</td>
-                        <td>{{ employee[2] }}</td>
-                        <td>{{ employee[3] }}</td>
-                        <td>{{ employee[4] }}</td>
-                        <td>{{ employee[5] }}</td>
-                        <td>{{ employee[6] }}</td>
-                        <td>{{ employee[7] }}</td>
-                        <td>{{ employee[8] }}</td>
-                        <td>{{ employee[9] }}</td>
-                        <td>{{ employee[10] }}</td>
-                    </tr>
+                <tr>
+                    <td>{{ employee[0] }}</td>
+                    <td>{{ employee[1] }}</td>
+                    <td>{{ employee[2] }}</td>
+                    <td>{{ employee[3] }}</td>
+                    <td>{{ employee[4] }}</td>
+                    <td>{{ employee[5] }}</td>
+                    <td>{{ employee[6] }}</td>
+                    <td>{{ employee[7] }}</td>
+                    <td>{{ employee[8] }}</td>
+                    <td>{{ employee[9] }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-    {% else %}
+        {% else %}
         <p>No employees found.</p>
-    {% endif %}
+        {% endif %}
 
-    <a href="/">Back to home</a>
+        <a href="/" class="back-btn">Back to home</a>
+    </div>
 </body>
+
 </html>

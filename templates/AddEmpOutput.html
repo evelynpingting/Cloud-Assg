@@ -2,34 +2,76 @@
 <html>
 
 <head>
-	<center>
-		<font color="DodgerBlue" size="5" style="font-family: avenir">
+	<title>Added Employee Details</title>
+	<style>
+		body {
+			background-color: white;
+			font-family: avenir;
+			color: #183a1d;
+			text-align: center;
+		}
 
-<body bgcolor="lightgrey">
-	<h1>SAVE SUCCESSFUL</h1><br>
-	<h2>Following Employee has been added to the database</h2><br>
-	<br>
-		<h3>Employee id: {{ id }}</h3>
-        <h3>Name: {{ name }}</h3>
-        <h3>Position: {{ position }}</h3>
-        <h3>Years of Experience: {{ exp_yr }}</h3>
-        <h3>Salary: ${{ "{:,.2f}".format(salary) }}</h3>
-        <br>
-	<title>Add Emp Output</title>
-	<form action="http://3.134.115.108:80/" autocomplete="on" method="GET">
+		h1 {
+			color: #183a1d;
+			margin-top: 50px;
+			margin-bottom: 30px;
+			font-size: 36px;
+			text-shadow: 2px 2px #f6c453;
+		}
 
-		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-			BACK</button><br><br>
+		h2 {
+			color: #183a1d;
+			font-size: 24px;
+			margin-bottom: 50px;
 
-	</form>
-	<a href="/"><input type="button" value="Back to home"></a>
-</body>
-</font>
-</center>
+		}
+
+		h3 {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+
+		.card {
+			position: relative;
+			background-color: #fefbe9;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+			padding: 20px;
+			margin: 20px;
+		}
+
+		.back-btn {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			text-shadow: 1px 1px #f6c453;
+		}
+
+		a {
+			color: #183a1d;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		.back-btn:hover {
+			background-color: #f0a04b;
+		}
+	</style>
 </head>
 
 <body>
-
+	<div class="card">
+		<h1>SAVE SUCCESSFUL</h1>
+		<h2>Following Employee has been added to the database</h2>
+		<h3>Employee id: {{ id }}</h3>
+		<h3>Name: {{ name }}</h3>
+		<h3>Position: {{ position }}</h3>
+		<h3>Years of Experience: {{ exp_yr }}</h3>
+		<h3>Salary: ${{ "{:,.2f}".format(salary) }}</h3>
+		<a href="/" class="back-btn">Back to home</a>
+	</div>
 </body>
 
 </html>

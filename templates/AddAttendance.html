@@ -3,36 +3,111 @@
 
 <head>
 	<title>Employee Attendance</title>
+	<style>
+		body {
+			background-color: white;
+			font-family: avenir;
+			color: #183a1d;
+		}
+
+		h1 {
+			color: #183a1d;
+			margin-top: 50px;
+			margin-bottom: 30px;
+			font-size: 36px;
+			text-shadow: 2px 2px #f6c453;
+		}
+
+		.card {
+			position: relative;
+			background-color: #fefbe9;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+			padding: 20px;
+			margin: 20px;
+		}
+
+		.back-btn {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			text-shadow: 1px 1px #f6c453;
+		}
+
+		input[type="number"] {
+			width: 100%;
+			max-width: 400px;
+			padding: 10px;
+			box-sizing: border-box;
+			background-color: #e1eedd;
+		}
+
+		a {
+			color: #183a1d;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		form {
+			text-align: center;
+			margin-bottom: 50px;
+
+		}
+
+		label {
+			font-size: 20px;
+		}
+
+		button[type="submit"] {
+			background-color: #f6c453;
+			height: 45px;
+			width: 200px;
+			color: #183a1d;
+			font-size: 15px;
+			font-weight: bold;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+			font: oblique;
+			display: inline-block;
+			margin-top: 40px;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #f0a04b;
+		}
+
+		.emp_input_container {
+			margin-top: 50px;
+		}
+	</style>
 </head>
 
 <body>
-	<center>
-		<font color="black" size="4" style="font-family: avenir">
+	<div class="card">
+		<center>
+			<h1>Attendance</h1>
 
-			<h1 style="color: DodgerBlue">Attendance</h1>
+			<form action="/AddAttendance" autocomplete="on" method="POST" enctype="multipart/form-data">
+				<h3>Input the employee ID that you wish to add attendance for</h3>
+				<div class="emp_input_container">
+					<label for="emp_id">Employee ID:</label>
+					<br><br>
+					<input type="number" id="emp_id" name="emp_id" autofocus size="40">
+				</div>
+				<button class="btn" type="submit">ADD ATTENDANCE</button>
+			</form>
 
-			<body bgcolor="lightgrey">
+			{% if success_msg %}
+			<div style="color: green;">{{ success_msg }}</div>
+			{% endif %}
 
-				<form action="/AddAttendance" autocomplete="on" method="POST" enctype="multipart/form-data">
-
-					<h4 style="color: DodgerBlue">Input the employee ID that you wish to add attendance for</h4>
-
-					Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number"
-						name="emp_id" autofocus size="40"><br><br>
-
-					<button type="submit"
-						style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">ADD ATTENDANCE</button>
-
-				</form>
-                {% if success_msg %}
-                <div style="color: green;">{{ success_msg }}</div>
-                {% endif %}
-				
-				<a href="/"><input type="button" value="Back to home"></a>
-			</body>
-
-		</font>
-	</center>
+			<a href="/" class="back-btn">Back to home</a>
+		</center>
+	</div>
 </body>
 
 </html>
