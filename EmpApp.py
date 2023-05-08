@@ -4,6 +4,7 @@ import os
 import boto3
 from config import *
 from datetime import datetime
+import uuid
 
 app = Flask(__name__)
 
@@ -83,6 +84,7 @@ def AddEmp():
             return "Please select a file"
 
         try:
+            emp_id = str(uuid.uuid4())
 
             cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
             db_conn.commit()
