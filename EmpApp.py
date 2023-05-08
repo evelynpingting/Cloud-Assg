@@ -84,8 +84,6 @@ def AddEmp():
             return "Please select a file"
 
         try:
-            emp_id = str(uuid.uuid4())
-
             cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
             db_conn.commit()
             emp_name = "" + first_name + " " + last_name
