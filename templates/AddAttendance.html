@@ -26,12 +26,6 @@
 			margin: 20px;
 		}
 
-		.back-btn {
-			position: absolute;
-			bottom: 20px;
-			left: 20px;
-			text-shadow: 1px 1px #f6c453;
-		}
 
 		input[type="number"] {
 			width: 100%;
@@ -59,6 +53,26 @@
 		label {
 			font-size: 20px;
 		}
+
+		input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+						position: absolute;
+						bottom: 20px;
+						left: 20px;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+    }
+
+		input[type="button"]:hover {
+				background-color: #f0a04b;
+    }
 
 		button[type="submit"] {
 			background-color: #f6c453;
@@ -105,7 +119,7 @@
 			<div style="color: green;">{{ success_msg }}</div>
 			{% endif %}
 
-			<a href="/" class="back-btn">Back to home</a>
+			<a href="/"><input type="button" value="Back to home"></a>
 		</center>
 	</div>
 </body>

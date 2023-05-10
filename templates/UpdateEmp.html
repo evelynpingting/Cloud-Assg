@@ -69,6 +69,25 @@
             padding: 5px;
         }
 
+        input[type="button"] {
+            background-color: #183a1d;
+            color: #fefbe9;
+            border: none;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #f0a04b;
+        }
 
         a {
             color: #183a1d;
@@ -78,7 +97,7 @@
         a:hover {
             text-decoration: underline;
         }
-
+        
         .back-btn {
             position: absolute;
             bottom: 20px;
@@ -150,7 +169,7 @@
 
             <button type="submit">Submit</button>
         </form>
-        <a href="/" class="back-btn">Back to home</a>
+        <a href="/"><input type="button" value="Back to home"></a>
     </div>
 
 </body>
