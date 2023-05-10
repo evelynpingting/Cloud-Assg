@@ -22,28 +22,28 @@ db_conn = connections.Connection(
 output = {}
 table = 'employee'
 
-def ping(self, reconnect=True):
-    """
-    Check if the server is alive.
+# def ping(self, reconnect=True):
+#     """
+#     Check if the server is alive.
 
-    :param reconnect: If the connection is closed, reconnect.
-    :raise Error: If the connection is closed and reconnect=False.
-    """
-    if self._sock is None:
-        if reconnect:
-            self.connect()
-            reconnect = False
-        else:
-            raise err.Error("Already closed")
-    try:
-        self._execute_command(COMMAND.COM_PING, "")
-        self._read_ok_packet()
-    except Exception:
-        if reconnect:
-            self.connect()
-            self.ping(False)
-        else:
-            raise
+#     :param reconnect: If the connection is closed, reconnect.
+#     :raise Error: If the connection is closed and reconnect=False.
+#     """
+#     if self._sock is None:
+#         if reconnect:
+#             self.connect()
+#             reconnect = False
+#         else:
+#             raise err.Error("Already closed")
+#     try:
+#         self._execute_command(COMMAND.COM_PING, "")
+#         self._read_ok_packet()
+#     except Exception:
+#         if reconnect:
+#             self.connect()
+#             self.ping(False)
+#         else:
+#             raise
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
