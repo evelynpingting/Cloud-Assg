@@ -11,19 +11,11 @@ app = Flask(__name__)
 bucket = custombucket
 region = customregion
 
-# db_conn = connections.Connection(
-#     host=customhost,
-#     port=3306,
-#     user=customuser,
-#     password=custompass,
-#     db=customdb
-# )
-
 db_conn = connections.Connection(
-    host= employee1.csyu0w9pvnji.us-east-1.rds.amazonaws.com,
+    host=customhost,
     port=3306,
-    user= aws_user,
-    password=Bait3273,
+    user=customuser,
+    password=custompass,
     db=customdb
 )
 
