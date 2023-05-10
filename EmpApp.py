@@ -68,7 +68,7 @@ def Error():
     return render_template('Error.html')
 
 @app.route("/AddEmp", methods=['GET','POST'])
-def AddEmp(self):
+def AddEmp():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
         first_name = request.form['first_name']
@@ -108,9 +108,8 @@ def AddEmp(self):
             return "Please select a file"
 
         try:
-            self.connection.ping()  # reconnecting mysql
-            with self.connection.cursor() as cursor:     
-                cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
+               
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,hire_date,exp_yr,edu_lvl,position,salary))
             db_conn.commit()
             emp_name = "" + first_name + " " + last_name
             # Uplaod image file in S3 #
@@ -146,7 +145,7 @@ def AddEmp(self):
 
 
 @app.route("/ApplyLeaveEmp", methods=['GET','POST'])
-def ApplyLeaveEmp(self):
+def ApplyLeaveEmp():
     if request.method == 'POST':
         try:
             emp_id = request.form['emp_id']
@@ -163,10 +162,9 @@ def ApplyLeaveEmp(self):
                 end_date = request.form['end_date']
 
                 insert_sql = "INSERT INTO emp_leave (emp_id, type_leave, start_date, end_date) VALUES (%s, %s, %s, %s)"
-                self.connection.ping()  # reconnecting mysql
-                with self.connection.cursor() as cursor:     
+                     
                 # execute the insert query with the values obtained from the HTML form
-                    cursor.execute(insert_sql, (emp_id,type_leave, start_date, end_date))
+                cursor.execute(insert_sql, (emp_id,type_leave, start_date, end_date))
 
                 # commit the changes to the database
                 db_conn.commit()
@@ -207,14 +205,13 @@ def EditEmployee():
     return 
 
 @app.route("/ReadEmp", methods=['GET', 'POST'])
-def ReadEmployee(self):
+def ReadEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        self.connection.ping()  # reconnecting mysql
-        with self.connection.cursor() as cursor:     
-            cursor.execute(select_sql, (emp_id,))
+            
+        cursor.execute(select_sql, (emp_id,))
         employee = cursor.fetchone()
         cursor.close()
 
@@ -241,12 +238,10 @@ def ReadEmployee(self):
   
 
 @app.route("/AllEmpInfo", methods=['GET','POST'])
-def ReadAllEmployees(self):
+def ReadAllEmployees():
     cursor = db_conn.cursor()
     select_sql = "SELECT * FROM employee"
-    self.connection.ping()  # reconnecting mysql
-    with self.connection.cursor() as cursor:     
-        cursor.execute(select_sql)
+    cursor.execute(select_sql)
     employees = cursor.fetchall()
     cursor.close()
 
@@ -259,16 +254,14 @@ def ReadAllEmployees(self):
         return render_template('Error.html', error_msg=error_msg)
     
 @app.route("/UpdateEmp", methods=['GET','POST'])
-def CheckEmployee(self):
+def CheckEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
 
         # Check if the employee ID exists in the database
         cursor = db_conn.cursor()
         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        self.connection.ping()  # reconnecting mysql
-        with self.connection.cursor() as cursor:     
-            cursor.execute(select_sql, (emp_id,))
+        cursor.execute(select_sql, (emp_id,))
         employee = cursor.fetchone()
         #cursor.close()
 
@@ -317,20 +310,19 @@ def CheckEmployee(self):
 
             # Perform the update in the database
             update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, hire_date = %s, exp_year = %s, edu_lvl = %s, position = %s, salary = %s WHERE emp_id = %s"
-            self.connection.ping()  # reconnecting mysql
-            with self.connection.cursor() as cursor:     
-                cursor.execute(update_sql, (
-                    employee_dict['first_name'],
-                    employee_dict['last_name'],
-                    employee_dict['pri_skill'],
-                    employee_dict['location'],
-                    employee_dict['hire_date'],
-                    employee_dict['exp_year'],
-                    employee_dict['edu_lvl'],
-                    employee_dict['position'],
-                    employee_dict['salary'],
-                    emp_id
-                ))
+                
+            cursor.execute(update_sql, (
+                employee_dict['first_name'],
+                employee_dict['last_name'],
+                employee_dict['pri_skill'],
+                employee_dict['location'],
+                employee_dict['hire_date'],
+                employee_dict['exp_year'],
+                employee_dict['edu_lvl'],
+                employee_dict['position'],
+                employee_dict['salary'],
+                emp_id
+            ))
             db_conn.commit()
 
             cursor.close()
@@ -353,7 +345,7 @@ def UpdateSuccess():
         return render_template('UpdateSuccess.html')
 
 @app.route("/DeleteEmp", methods=['GET','POST'])
-def DeleteEmployee(self):
+def DeleteEmployee():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
 
@@ -365,10 +357,8 @@ def DeleteEmployee(self):
 
         if employee:
             # Execute the DELETE statement to remove the employee record
-            delete_sql = "DELETE FROM employee WHERE emp_id = %s"
-            self.connection.ping()  # reconnecting mysql
-            with self.connection.cursor() as cursor:     
-                cursor.execute(delete_sql, (emp_id,))
+            delete_sql = "DELETE FROM employee WHERE emp_id = %s"  
+            cursor.execute(delete_sql, (emp_id,))
             db_conn.commit()
             cursor.close()
 
@@ -384,7 +374,7 @@ def DeleteEmployee(self):
 from datetime import datetime
 
 @app.route("/AddAttendance", methods=['GET','POST'])
-def AddAttendance(self):
+def AddAttendance():
     if request.method == "POST":
         date = datetime.now().strftime("%Y-%m-%d")
         emp_id = request.form['emp_id']
@@ -393,9 +383,8 @@ def AddAttendance(self):
         # Check if the employee ID exists in the database
         cursor = db_conn.cursor()
         select_sql = "SELECT * FROM employee WHERE emp_id = %s"
-        self.connection.ping()  # reconnecting mysql
-        with self.connection.cursor() as cursor:     
-            cursor.execute(select_sql, (emp_id,))
+         
+        cursor.execute(select_sql, (emp_id,))
         employee = cursor.fetchone()
 
         if employee:
@@ -416,7 +405,7 @@ def AddAttendance(self):
 
     
 @app.route("/CheckAttendanceRecord", methods=['GET','POST'])
-def CheckAttendanceRecord(self):
+def CheckAttendanceRecord():
     if request.method == "POST":
         # get the date from the query parameter
         date =  request.form['date']
@@ -425,9 +414,8 @@ def CheckAttendanceRecord(self):
         # retrieve the attendance record from the database
         cursor = db_conn.cursor()
         select_sql = "SELECT employeeAttendance.date, employeeAttendance.emp_id, employee.first_name, employee.last_name, employeeAttendance.time FROM employeeAttendance INNER JOIN employee ON employeeAttendance.emp_id=employee.emp_id WHERE date=%s"
-        self.connection.ping()  # reconnecting mysql
-        with self.connection.cursor() as cursor:     
-            cursor.execute(select_sql, (date,))
+            
+        cursor.execute(select_sql, (date,))
         attendance_info = cursor.fetchall()
         cursor.close()
         if attendance_info:
